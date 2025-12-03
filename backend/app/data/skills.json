@@ -1,0 +1,93 @@
+{
+    "version": "1.0",
+    "last_updated": "2025-11-28",
+    "categories": {
+        "programming": [
+            "python",
+            "javascript",
+            "java",
+            "go",
+            "rust",
+            "c++",
+            "c#",
+            "typescript",
+            "php",
+            "ruby",
+            "swift",
+            "kotlin",
+            "scala"
+        ],
+        "frameworks": [
+            "react",
+            "vue",
+            "angular",
+            "django",
+            "flask",
+            "spring",
+            "node.js",
+            "express",
+            "fastapi",
+            "rails",
+            "laravel",
+            ".net"
+        ],
+        "cloud": [
+            "aws",
+            "azure",
+            "gcp",
+            "docker",
+            "kubernetes",
+            "terraform",
+            "ansible",
+            "jenkins",
+            "circleci",
+            "github actions"
+        ],
+        "databases": [
+            "postgresql",
+            "mysql",
+            "mongodb",
+            "redis",
+            "elasticsearch",
+            "cassandra",
+            "dynamodb",
+            "sqlite",
+            "oracle",
+            "sql server"
+        ],
+        "product_management": [
+            "jira",
+            "confluence",
+            "roadmap",
+            "backlog",
+            "agile",
+            "scrum",
+            "kanban",
+            "user stories",
+            "product strategy"
+        ],
+        "analytics": [
+            "sql",
+            "tableau",
+            "power bi",
+            "ga4",
+            "mixpanel",
+            "amplitude",
+            "looker",
+            "excel",
+            "python pandas"
+        ],
+        "ai_ml": [
+            "tensorflow",
+            "pytorch",
+            "scikit-learn",
+            "langchain",
+            "openai",
+            "huggingface",
+            "nlp",
+            "computer vision",
+            "pandas",
+            "numpy"
+        ]
+    }
+}

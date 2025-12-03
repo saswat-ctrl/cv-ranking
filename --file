@@ -1,0 +1,2 @@
+usage: test_extraction.py [-h] [--file FILE] [--dir DIR] [--type {cv,jd}]
+test_extraction.py: error: unrecognized arguments: /app/test_documents/Saswat_Ray_PM4000.pdf

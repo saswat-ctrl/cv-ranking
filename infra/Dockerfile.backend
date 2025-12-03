@@ -1,0 +1,63 @@
+
+# Build stage
+FROM python:3.11-slim as builder
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc libpq-dev curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+
+# Add Poetry to PATH
+ENV PATH="/root/.local/bin:$PATH"
+
+# Install export plugin
+RUN poetry self add poetry-plugin-export
+
+# Copy poetry files
+COPY backend/pyproject.toml backend/poetry.lock* ./
+
+# Export requirements.txt
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+# Install python dependencies from requirements.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
+
+# Final stage
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install runtime dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libpq-dev libgomp1 libgl1 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy wheels and install
+COPY --from=builder /app/wheels /wheels
+COPY --from=builder /app/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+# Copy application code
+COPY backend/app ./app
+COPY backend/alembic.ini .
+COPY backend/alembic ./alembic
+
+# Create directory for uploads
+RUN mkdir -p /app/uploads
+
+# Expose port
+EXPOSE 8000
+
+# Run application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
