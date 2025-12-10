@@ -1,0 +1,113 @@
+
+> frontend@0.1.0 lint
+> eslint
+
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/candidates/[candidateId]/page.tsx
+  31:8  warning  React Hook useEffect has missing dependencies: 'fetchCandidateDetails' and 'router'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/candidates/page.tsx
+    6:29  warning  'CardHeader' is defined but never used                                                                              @typescript-eslint/no-unused-vars
+    6:41  warning  'CardTitle' is defined but never used                                                                               @typescript-eslint/no-unused-vars
+   54:8   warning  React Hook useEffect has a missing dependency: 'fetchCandidates'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  162:23  error    Unexpected any. Specify a different type                                                                            @typescript-eslint/no-explicit-any
+  201:23  error    Unexpected any. Specify a different type                                                                            @typescript-eslint/no-explicit-any
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/page.tsx
+    6:29  warning  'CardDescription' is defined but never used                                                                                        @typescript-eslint/no-unused-vars
+   17:18  warning  'TrendingUp' is defined but never used                                                                                             @typescript-eslint/no-unused-vars
+   17:62  warning  'FileText' is defined but never used                                                                                               @typescript-eslint/no-unused-vars
+   60:8   warning  React Hook useEffect has missing dependencies: 'fetchJobDetails' and 'router'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  238:58  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                    react/no-unescaped-entities
+  238:70  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                    react/no-unescaped-entities
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/upload/page.tsx
+   56:12  warning  'progress' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   56:22  warning  'setProgress' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   63:12  warning  'importing' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+   63:23  warning  'setImporting' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+   71:13  error    Error: Cannot access variable before it is declared
+
+`fetchJobs` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/upload/page.tsx:71:13
+  69 |     useEffect(() => {
+  70 |         if (importDialogOpen) {
+> 71 |             fetchJobs()
+     |             ^^^^^^^^^ `fetchJobs` accessed before it is declared
+  72 |         } else {
+  73 |             // Reset job selection when dialog closes, but keep the cart
+  74 |             setSelectedJob(null)
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/upload/page.tsx:87:5
+  85 |     }, [selectedJob])
+  86 |
+> 87 |     const fetchJobs = async () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 88 |         try {
+     | ^^^^^^^^^^^^^
+> 89 |             const response = await api.get("/jobs")
+     | ^^^^^^^^^^^^^
+> 90 |             // FILTER OUT CURRENT JOB
+     | ^^^^^^^^^^^^^
+> 91 |             const otherJobs = response.data.filter((job: Job) => job.id !== jobId)
+     | ^^^^^^^^^^^^^
+> 92 |             setJobs(otherJobs)
+     | ^^^^^^^^^^^^^
+> 93 |         } catch (error) {
+     | ^^^^^^^^^^^^^
+> 94 |             toast.error("Failed to load jobs")
+     | ^^^^^^^^^^^^^
+> 95 |         }
+     | ^^^^^^^^^^^^^
+> 96 |     }
+     | ^^^^^^ `fetchJobs` is declared here
+  97 |
+  98 |     const fetchCandidates = async (sourceJobId: string) => {
+  99 |         try {  react-hooks/immutability
+   77:8   warning  React Hook useEffect has a missing dependency: 'fetchJobs'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react-hooks/exhaustive-deps
+   81:13  error    Error: Cannot access variable before it is declared
+
+`fetchCandidates` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/upload/page.tsx:81:13
+  79 |     useEffect(() => {
+  80 |         if (selectedJob) {
+> 81 |             fetchCandidates(selectedJob)
+     |             ^^^^^^^^^^^^^^^ `fetchCandidates` accessed before it is declared
+  82 |         } else {
+  83 |             setCandidates([])
+  84 |         }
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/[id]/upload/page.tsx:98:5
+   96 |     }
+   97 |
+>  98 |     const fetchCandidates = async (sourceJobId: string) => {
+      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  99 |         try {
+      | ^^^^^^^^^^^^^
+> 100 |             const response = await api.get(`/jobs/${sourceJobId}/candidates`)
+      | ^^^^^^^^^^^^^
+> 101 |             setCandidates(response.data)
+      | ^^^^^^^^^^^^^
+> 102 |         } catch (error) {
+      | ^^^^^^^^^^^^^
+> 103 |             toast.error("Failed to load candidates")
+      | ^^^^^^^^^^^^^
+> 104 |         }
+      | ^^^^^^^^^^^^^
+> 105 |     }
+      | ^^^^^^ `fetchCandidates` is declared here
+  106 |
+  107 |     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  108 |         if (e.target.files && e.target.files.length > 0) {                                                     react-hooks/immutability
+   93:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  102:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  233:24  warning  't' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  249:18  warning  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+
+/Users/saswatray/AntiGravity/saswat-ctrl/SaarNews/frontend/src/app/jobs/page.tsx
+  51:30  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 24 problems (6 errors, 18 warnings)
+

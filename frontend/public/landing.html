@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Latsize - AI-Powered Hiring Platform</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19c29d",
+                        "background-light": "#F5F8FA",
+                        "background-dark": "#11211d",
+                        "navy": "#0E1C36",
+                        "mint-green": "#19C29C",
+                        "slate-blue": "#1A2B48"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 8px 30px rgb(0,0,0,0.04)',
+                        'soft-hover': '0 8px 30px rgb(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(25, 194, 157, 0.3)'
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(25, 194, 156, 0.05) 0%, rgba(245, 248, 250, 0) 50%);
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light text-navy antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <img src="logo.png" alt="Latsize" class="w-8 h-8 object-contain">
+                    <span class="font-bold text-xl tracking-tight text-navy">Latsize</span>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <button onclick="openSignIn()"
+                        class="text-navy font-semibold hover:text-mint-green transition-colors">Sign In</button>
+                    <button onclick="openSignUp()"
+                        class="bg-navy text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-slate-blue hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-navy">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-8 lg:pt-40 lg:pb-10 relative hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+
+            <!-- Badge -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-8 animate-fade-in-up">
+                <span class="flex h-2 w-2 rounded-full bg-mint-green"></span>
+                <span class="text-sm font-medium text-gray-600">New: AI-Powered Candidate Matching 2.0</span>
+            </div>
+
+            <!-- Headline -->
+            <h1
+                class="text-5xl md:text-6xl lg:text-7xl font-black text-navy tracking-tight mb-6 max-w-5xl leading-[1.1]">
+                The AI-Powered ATS for <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-navy to-mint-green">Modern
+                    Recruiters</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed">
+                Screen resumes instantly, shortlist the best talent, and hire faster—without the manual grind. Join
+                thousands of recruiters hiring smarter.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center mb-16">
+                <button onclick="openSignUp()"
+                    class="bg-navy text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                    Start Hiring for Free
+                    <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                </button>
+
+            </div>
+
+            <!-- Trust Badges Removed -->
+
+            <!-- Hero Image / Dashboard Preview -->
+            <div class="relative w-full max-w-6xl mx-auto">
+                <!-- Glow Effect -->
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-mint-green to-navy rounded-[2.5rem] blur opacity-20">
+                </div>
+
+                <!-- Main Image Container -->
+                <div
+                    class="relative bg-white rounded-[2rem] shadow-2xl border border-gray-200 overflow-hidden aspect-[16/11] flex items-center justify-center bg-gray-50">
+
+                    <!-- Browser Window Shell -->
+                    <div class="w-full h-full flex flex-col bg-white font-sans">
+                        <!-- Browser Top Bar -->
+                        <div class="h-9 bg-[#F3F4F6] border-b border-gray-200 flex items-center px-4 gap-4 shrink-0">
+                            <!-- Window Controls -->
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5"></div>
+                                <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5"></div>
+                            </div>
+                            <!-- Address Bar -->
+                            <div class="flex-1 flex justify-center px-20">
+                                <div
+                                    class="bg-white h-6 w-full max-w-md rounded-[4px] border border-gray-200 flex items-center justify-center gap-2 text-[10px] text-gray-500 shadow-sm">
+                                    <span class="material-symbols-outlined text-[10px]">lock</span>
+                                    latsize.com
+                                </div>
+                            </div>
+                            <!-- Spacer -->
+                            <div class="w-14"></div>
+                        </div>
+
+                        <!-- App Content -->
+                        <div class="flex-1 flex overflow-hidden">
+                            <!-- Sidebar -->
+                            <div
+                                class="w-16 border-r border-gray-100 bg-white flex flex-col items-center py-4 gap-6 shrink-0 z-10">
+                                <!-- Brand -->
+                                <div class="w-10 h-10 flex items-center justify-center mb-2">
+                                    <img src="logo.png" alt="Latsize" class="w-8 h-8 object-contain">
+                                </div>
+
+                                <!-- Icons -->
+                                <div class="w-10 h-10 rounded-xl bg-navy/5 flex items-center justify-center text-navy">
+                                    <span class="material-symbols-outlined text-[20px]">grid_view</span>
+                                </div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-gray-400">
+                                    <span class="material-symbols-outlined text-[20px]">work</span>
+                                </div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-mint-green text-white shadow-lg shadow-mint-green/20 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">group</span>
+                                </div>
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-transparent flex items-center justify-center text-gray-400">
+                                    <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                </div>
+                            </div>
+
+                            <!-- Main Column -->
+                            <div class="flex-1 flex flex-col bg-white overflow-hidden">
+                                <!-- Context Header (Moved Here) -->
+                                <div
+                                    class="h-16 border-b border-gray-100 flex items-center justify-between px-6 bg-white shrink-0">
+                                    <div class="text-left">
+                                        <h3 class="text-lg font-bold text-navy">Senior Product Designer</h3>
+                                        <p class="text-xs text-gray-500">Remote • Full-time</p>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-1 rounded bg-gray-100 text-xs font-medium text-gray-600">42
+                                            Applicants</span>
+                                        <span
+                                            class="px-2 py-1 rounded bg-mint-green/10 text-xs font-bold text-mint-green">8
+                                            Shortlisted</span>
+                                    </div>
+                                </div>
+
+                                <!-- Split View -->
+                                <div class="flex-1 flex overflow-hidden">
+                                    <!-- Left Panel: Candidate List -->
+                                    <div class="w-[58%] flex flex-col border-r border-gray-100 bg-gray-50/30">
+                                        <!-- List Header (Filter) -->
+                                        <div
+                                            class="px-4 py-3 border-b border-gray-100 bg-white flex justify-between items-center shrink-0">
+                                            <h4 class="text-xs font-bold text-navy">Top Matches</h4>
+                                            <button
+                                                class="text-[10px] text-mint-green font-bold flex items-center gap-1 px-2 py-1 rounded">
+                                                <span class="material-symbols-outlined text-[14px]">filter_list</span>
+                                                Filter
+                                            </button>
+                                        </div>
+
+                                        <!-- List -->
+                                        <div class="flex-1 overflow-hidden p-4 flex flex-col gap-3">
+                                            <!-- Active Card -->
+                                            <div
+                                                class="p-4 rounded-xl border border-mint-green bg-mint-green/5 shadow-sm relative">
+                                                <div class="flex justify-between items-start mb-3">
+                                                    <div class="flex gap-3">
+                                                        <div
+                                                            class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden shrink-0 border-2 border-white shadow-sm">
+                                                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                                                                alt="Alex" class="w-full h-full object-cover">
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="text-sm font-bold text-navy">Alex Morgan</h5>
+                                                            <p class="text-[10px] text-gray-500">Senior UX Designer</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <span class="text-sm font-bold text-mint-green">98% Match</span>
+                                                        <p class="text-[10px] text-gray-500">5y Exp • London</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    <span
+                                                        class="px-2 py-1 rounded text-[10px] font-medium bg-white border border-mint-green/20 text-navy shadow-sm">Figma</span>
+                                                    <span
+                                                        class="px-2 py-1 rounded text-[10px] font-medium bg-white border border-mint-green/20 text-navy shadow-sm">React</span>
+                                                    <span
+                                                        class="px-2 py-1 rounded text-[10px] font-medium bg-white border border-mint-green/20 text-navy shadow-sm">Sketch</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card 2 -->
+                                            <div class="p-3 rounded-xl border border-gray-200 bg-white">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <div class="flex gap-3">
+                                                        <div
+                                                            class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden shrink-0 border border-gray-100">
+                                                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                                                                alt="Sarah" class="w-full h-full object-cover">
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="text-sm font-bold text-navy">
+                                                                Sarah Chen</h5>
+                                                            <p class="text-[10px] text-gray-500">Product Designer</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <span class="text-sm font-bold text-mint-green">85% Match</span>
+                                                        <p class="text-[10px] text-gray-500">3y Exp • Remote</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    <span
+                                                        class="px-2 py-0.5 rounded text-[10px] font-medium bg-gray-50 text-gray-600 border border-gray-100">Prototyping</span>
+                                                    <span
+                                                        class="px-2 py-0.5 rounded text-[10px] font-medium bg-gray-50 text-gray-600 border border-gray-100">Sketch</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card 3 -->
+                                            <div class="p-3 rounded-xl border border-gray-200 bg-white">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <div class="flex gap-3">
+                                                        <div
+                                                            class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden shrink-0 border border-gray-100">
+                                                            <img src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+                                                                alt="Mike" class="w-full h-full object-cover">
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="text-sm font-bold text-navy">
+                                                                Mike Ross</h5>
+                                                            <p class="text-[10px] text-gray-500">UI Designer</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <span class="text-sm font-bold text-mint-green">82% Match</span>
+                                                        <p class="text-[10px] text-gray-500">2y Exp • NY</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    <span
+                                                        class="px-2 py-0.5 rounded text-[10px] font-medium bg-gray-50 text-gray-600 border border-gray-100">Prototyping</span>
+                                                    <span
+                                                        class="px-2 py-0.5 rounded text-[10px] font-medium bg-gray-50 text-gray-600 border border-gray-100">Sketch</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card 4 -->
+                                            <div class="p-3 rounded-xl border border-gray-200 bg-white">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <div class="flex gap-3">
+                                                        <div
+                                                            class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden shrink-0 border border-gray-100">
+                                                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026024e"
+                                                                alt="David" class="w-full h-full object-cover">
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="text-sm font-bold text-navy">
+                                                                David Kim</h5>
+                                                            <p class="text-[10px] text-gray-500">Frontend Dev</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <span class="text-sm font-bold text-mint-green">65% Match</span>
+                                                        <p class="text-[10px] text-gray-500">4y Exp • SF</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card 5 (New) -->
+                                            <div class="p-3 rounded-xl border border-gray-200 bg-white">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <div class="flex gap-3">
+                                                        <div
+                                                            class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden shrink-0 border border-gray-100">
+                                                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026024f"
+                                                                alt="Emily" class="w-full h-full object-cover">
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="text-sm font-bold text-navy">
+                                                                Emily Davis</h5>
+                                                            <p class="text-[10px] text-gray-500">Visual Designer</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <span class="text-sm font-bold text-mint-green">62% Match</span>
+                                                        <p class="text-[10px] text-gray-500">3y Exp • LA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Card 6 (New) -->
+                                            <div class="p-3 rounded-xl border border-gray-200 bg-white">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <div class="flex gap-3">
+                                                        <div
+                                                            class="w-9 h-9 rounded-full bg-gray-200 overflow-hidden shrink-0 border border-gray-100">
+                                                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026024g"
+                                                                alt="James" class="w-full h-full object-cover">
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="text-sm font-bold text-navy">
+                                                                James Wilson</h5>
+                                                            <p class="text-[10px] text-gray-500">UX Researcher</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <span class="text-sm font-bold text-mint-green">58% Match</span>
+                                                        <p class="text-[10px] text-gray-500">2y Exp • Austin</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right Panel: Detail View -->
+                                    <div class="w-[42%] bg-white p-5 flex flex-col border-l border-gray-50">
+                                        <div class="flex justify-between items-center mb-4">
+                                            <h4 class="text-sm font-bold text-navy flex items-center gap-1">
+                                                Skill Matching Score
+                                                <span
+                                                    class="material-symbols-outlined text-gray-400 text-[16px]">info</span>
+                                            </h4>
+                                            <span
+                                                class="material-symbols-outlined text-gray-400 text-[20px]">expand_less</span>
+                                        </div>
+
+                                        <div class="flex items-center gap-4 mb-6">
+                                            <!-- Circular Chart -->
+                                            <div class="relative w-20 h-20 shrink-0">
+                                                <svg class="w-full h-full transform -rotate-90">
+                                                    <circle cx="40" cy="40" r="36" stroke="#E5E7EB" stroke-width="8"
+                                                        fill="transparent" />
+                                                    <circle cx="40" cy="40" r="36" stroke="#19C29C" stroke-width="8"
+                                                        fill="transparent" stroke-dasharray="226.2"
+                                                        stroke-dashoffset="4.5" stroke-linecap="round" />
+                                                </svg>
+                                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                                    <span class="text-lg font-bold text-navy">98%</span>
+                                                    <span class="text-[8px] text-gray-500 uppercase">Match</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Skill Bars -->
+                                            <div class="flex-1 flex flex-col gap-3">
+                                                <div class="flex flex-col gap-1">
+                                                    <div class="flex justify-between text-[10px] font-medium text-navy">
+                                                        <span>Figma</span>
+                                                        <span>99%</span>
+                                                    </div>
+                                                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-mint-green rounded-full"
+                                                            style="width: 99%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col gap-1">
+                                                    <div class="flex justify-between text-[10px] font-medium text-navy">
+                                                        <span>React</span>
+                                                        <span>95%</span>
+                                                    </div>
+                                                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-mint-green rounded-full"
+                                                            style="width: 95%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col gap-1">
+                                                    <div class="flex justify-between text-[10px] font-medium text-navy">
+                                                        <span>UX Strategy</span>
+                                                        <span>97%</span>
+                                                    </div>
+                                                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-mint-green rounded-full"
+                                                            style="width: 97%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col gap-1">
+                                                    <div class="flex justify-between text-[10px] font-medium text-navy">
+                                                        <span>User Research</span>
+                                                        <span>92%</span>
+                                                    </div>
+                                                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-mint-green rounded-full"
+                                                            style="width: 92%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col gap-1">
+                                                    <div class="flex justify-between text-[10px] font-medium text-navy">
+                                                        <span>Prototyping</span>
+                                                        <span>88%</span>
+                                                    </div>
+                                                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-mint-green rounded-full"
+                                                            style="width: 88%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex flex-col gap-1">
+                                                    <div class="flex justify-between text-[10px] font-medium text-navy">
+                                                        <span>Wireframing</span>
+                                                        <span>90%</span>
+                                                    </div>
+                                                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                                                        <div class="h-full bg-mint-green rounded-full"
+                                                            style="width: 90%"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Accordions -->
+                                        <div class="flex flex-col gap-3">
+                                            <div
+                                                class="border-t border-gray-100 py-3 flex justify-between items-center">
+                                                <span class="text-xs font-bold text-navy">Key
+                                                    Insights</span>
+                                                <span
+                                                    class="material-symbols-outlined text-gray-400 text-[20px]">expand_more</span>
+                                            </div>
+                                            <div
+                                                class="border-t border-gray-100 py-3 flex justify-between items-center">
+                                                <span class="text-xs font-bold text-navy">Experience
+                                                    Highlights</span>
+                                                <span
+                                                    class="material-symbols-outlined text-gray-400 text-[20px]">expand_more</span>
+                                            </div>
+                                            <div
+                                                class="border-t border-gray-100 py-3 flex justify-between items-center">
+                                                <span class="text-xs font-bold text-navy">Education
+                                                    & Certs</span>
+                                                <span
+                                                    class="material-symbols-outlined text-gray-400 text-[20px]">expand_more</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Customer Segments Section -->
+    <section class="relative w-full py-4 bg-background-light">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="px-4 sm:px-8 md:px-20 lg:px-40 flex flex-1 justify-center">
+                <div class="layout-content-container flex flex-col max-w-5xl flex-1 gap-12">
+                    <!-- PageHeading Component -->
+                    <div class="flex flex-col items-center text-center gap-4 px-4">
+                        <h1
+                            class="text-navy dark:text-white text-4xl font-black leading-tight tracking-[-0.033em] max-w-3xl">
+                            Built for Recruiters, Teams, and Agencies That Want Faster, Smarter Hiring
+                        </h1>
+                        <p class="text-gray-600 dark:text-gray-300 text-base font-normal leading-normal max-w-3xl">
+                            Latsize adapts to the way you hire. Whether you recruit for multiple clients, support
+                            internal hiring, or manage high-volume pipelines, the AI helps you screen smarter, shortlist
+                            faster, and explain your decisions with confidence.
+                        </p>
+                    </div>
+                    <!-- TextGrid Component -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+                        <div
+                            class="flex flex-1 gap-4 rounded-2xl bg-white dark:bg-navy/20 p-8 flex-col border border-gray-100 dark:border-navy/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-mint-green !text-3xl">business_center</span>
+                            <div class="flex flex-col gap-1">
+                                <h2 class="text-navy dark:text-white text-base font-bold leading-tight">Staffing &amp;
+                                    Placement Agencies</h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">Manage
+                                    multiple clients and high-volume pipelines with AI-powered screening and
+                                    shortlisting.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-1 gap-4 rounded-2xl bg-white dark:bg-navy/20 p-8 flex-col border border-gray-100 dark:border-navy/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-mint-green !text-3xl">person</span>
+                            <div class="flex flex-col gap-1">
+                                <h2 class="text-navy dark:text-white text-base font-bold leading-tight">Independent
+                                    Recruiters &amp; Freelancers</h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">Boost
+                                    your efficiency and win more placements with tools designed for solo professionals.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-1 gap-4 rounded-2xl bg-white dark:bg-navy/20 p-8 flex-col border border-gray-100 dark:border-navy/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-mint-green !text-3xl">groups</span>
+                            <div class="flex flex-col gap-1">
+                                <h2 class="text-navy dark:text-white text-base font-bold leading-tight">In-House HR
+                                    Recruiters</h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">Support
+                                    internal hiring goals, improve collaboration, and find the best-fit candidates
+                                    faster.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-1 gap-4 rounded-2xl bg-white dark:bg-navy/20 p-8 flex-col border border-gray-100 dark:border-navy/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-mint-green !text-3xl">corporate_fare</span>
+                            <div class="flex flex-col gap-1">
+                                <h2 class="text-navy dark:text-white text-base font-bold leading-tight">Enterprise
+                                    Talent Teams</h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">Scale
+                                    your talent acquisition with a platform built for high-volume, complex hiring needs.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-1 gap-4 rounded-2xl bg-white dark:bg-navy/20 p-8 flex-col border border-gray-100 dark:border-navy/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-mint-green !text-3xl">code</span>
+                            <div class="flex flex-col gap-1">
+                                <h2 class="text-navy dark:text-white text-base font-bold leading-tight">Technical
+                                    Recruiters &amp; IT Hiring</h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">
+                                    Accurately screen specialized technical roles and identify top candidates with
+                                    precision.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-1 gap-4 rounded-2xl bg-white dark:bg-navy/20 p-8 flex-col border border-gray-100 dark:border-navy/30 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <span class="material-symbols-outlined text-mint-green !text-3xl">request_quote</span>
+                            <div class="flex flex-col gap-1">
+                                <h2 class="text-navy dark:text-white text-base font-bold leading-tight">Contract &amp;
+                                    RPO Recruiters</h2>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">
+                                    Streamline project-based and outsourced recruiting workflows for consistent, quality
+                                    hires.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CTA Section -->
+                    <div class="flex flex-col items-center gap-6 pt-8">
+                        <!-- TitleText Component -->
+                        <h3
+                            class="text-navy dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em] px-4 text-center">
+                            Ready to hire smarter?</h3>
+                        <!-- ButtonGroup Component -->
+                        <div class="flex flex-col sm:flex-row flex-wrap gap-3 px-4 py-3 justify-center w-full max-w-md">
+                            <button onclick="openSignUp()"
+                                class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-6 bg-navy dark:bg-mint-green text-white dark:text-navy text-base font-bold leading-normal tracking-[0.015em] grow transition-all hover:bg-navy/90 hover:shadow-lg hover:-translate-y-0.5 dark:hover:bg-mint-green/90">
+                                <span class="truncate">Get Started – It’s Free</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="relative w-full pt-20 pb-10 bg-white">
+        <div class="layout-container flex h-full grow flex-col w-full">
+            <div class="flex flex-1 justify-center">
+                <div
+                    class="layout-content-container flex flex-col max-w-[90rem] flex-1 items-center px-4 sm:px-8 md:px-20 lg:px-40">
+                    <!-- SectionHeader Component -->
+                    <h2
+                        class="text-navy dark:text-white text-3xl sm:text-4xl font-black leading-tight tracking-tight text-center pb-12">
+                        Get the Perfect Hire in 3 Simple Steps
+                    </h2>
+
+                    <!-- TextGrid Component -->
+                    <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-3 md:gap-12 relative">
+                        <!-- Connector Lines (Desktop) -->
+                        <div class="hidden md:block absolute top-[40%] left-0 w-full h-px -translate-y-1/2 z-0">
+                            <svg class="absolute top-0 left-0 w-full h-2" preserveAspectRatio="none">
+                                <line stroke="#E5E7EB" stroke-dasharray="8 8" stroke-width="2" x1="15%" x2="85%" y1="1"
+                                    y2="1"></line>
+                            </svg>
+                        </div>
+
+                        <!-- Step 1 -->
+                        <div
+                            class="relative z-10 flex flex-1 flex-col gap-6 rounded-2xl border border-gray-100 dark:border-navy/30 bg-background-light dark:bg-navy/20 p-8 text-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex h-20 w-20 items-center justify-center rounded-2xl bg-mint-green text-white shadow-lg shadow-mint-green/20 mb-2">
+                                <span class="material-symbols-outlined text-4xl">upload_file</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-navy dark:text-white text-xl font-bold leading-tight">1. Provide the Job
+                                    Description</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-relaxed">
+                                    Upload your job description and our AI will instantly analyze it for the key skills
+                                    and requirements needed.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div
+                            class="relative z-10 flex flex-1 flex-col gap-6 rounded-2xl border border-gray-100 dark:border-navy/30 bg-background-light dark:bg-navy/20 p-8 text-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex h-20 w-20 items-center justify-center rounded-2xl bg-mint-green text-white shadow-lg shadow-mint-green/20 mb-2">
+                                <span class="material-symbols-outlined text-4xl">group</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-navy dark:text-white text-xl font-bold leading-tight">2. Add Your
+                                    Candidate Pool</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-relaxed">
+                                    Easily upload multiple candidate CVs at once or connect to your existing Applicant
+                                    Tracking System.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div
+                            class="relative z-10 flex flex-1 flex-col gap-6 rounded-2xl border border-gray-100 dark:border-navy/30 bg-background-light dark:bg-navy/20 p-8 text-center items-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex h-20 w-20 items-center justify-center rounded-2xl bg-mint-green text-white shadow-lg shadow-mint-green/20 mb-2">
+                                <span class="material-symbols-outlined text-4xl">format_list_numbered</span>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <h3 class="text-navy dark:text-white text-xl font-bold leading-tight">3. Receive Your
+                                    Shortlist</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm font-normal leading-relaxed">
+                                    Get an instantly generated, ranked list of the most suitable candidates with
+                                    detailed match scores.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SingleButton Component -->
+                    <div class="flex px-4 pt-12 pb-6 justify-center w-full">
+                        <button onclick="openSignUp()"
+                            class="flex items-center justify-center gap-2 rounded-2xl h-14 px-8 bg-navy text-white text-lg font-bold leading-normal tracking-wide shadow-lg shadow-navy/20 hover:bg-slate-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <span>Start Hiring Smarter</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="relative w-full py-20 bg-background-light">
+        <div class="layout-container flex h-full grow flex-col w-full">
+            <div class="flex flex-1 justify-center">
+                <div class="layout-content-container flex flex-col max-w-7xl flex-1 items-center px-4 sm:px-8 md:px-20">
+                    <!-- Section Header -->
+                    <div class="flex flex-col items-center text-center gap-4 mb-16">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-200 shadow-sm mb-2">
+                            <span class="text-xs font-bold text-navy uppercase tracking-wider">Trusted by Leaders</span>
+                        </div>
+                        <h2
+                            class="text-navy dark:text-white text-3xl sm:text-4xl font-black leading-tight tracking-tight max-w-2xl">
+                            Don't Just Take Our Word For It
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-300 text-lg font-normal leading-relaxed max-w-2xl">
+                            See how top agencies and HR teams are transforming their hiring process with Latsize.
+                        </p>
+                    </div>
+
+                    <!-- Testimonials Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+                        <!-- Card 1 -->
+                        <div
+                            class="flex flex-col gap-6 p-8 rounded-2xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex gap-1 text-mint-green">
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                            </div>
+                            <p class="text-navy text-lg font-medium leading-relaxed">
+                                "Latsize has completely revolutionized how we screen candidates. We've cut our
+                                time-to-hire by 40% and the quality of candidates has never been better."
+                            </p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
+                                    <!-- Placeholder Avatar -->
+                                    <svg class="h-full w-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-navy font-bold">Sarah Jenkins</h4>
+                                    <p class="text-gray-500 text-sm">Head of Talent, TechFlow</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="flex flex-col gap-6 p-8 rounded-2xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex gap-1 text-mint-green">
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                            </div>
+                            <p class="text-navy text-lg font-medium leading-relaxed">
+                                "As an independent recruiter, efficiency is everything. This tool acts like a 24/7
+                                assistant that never misses a detail. Highly recommended!"
+                            </p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
+                                    <!-- Placeholder Avatar -->
+                                    <svg class="h-full w-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-navy font-bold">Michael Chen</h4>
+                                    <p class="text-gray-500 text-sm">Founder, MC Recruiting</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="flex flex-col gap-6 p-8 rounded-2xl bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex gap-1 text-mint-green">
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                                <span class="material-symbols-outlined text-xl fill-current">star</span>
+                            </div>
+                            <p class="text-navy text-lg font-medium leading-relaxed">
+                                "The AI matching is incredibly accurate. It picks up on nuances in resumes that keyword
+                                searchers always miss. A game changer for our agency."
+                            </p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <div class="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
+                                    <!-- Placeholder Avatar -->
+                                    <svg class="h-full w-full text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-navy font-bold">Elena Rodriguez</h4>
+                                    <p class="text-gray-500 text-sm">Director of HR, OmniCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-navy text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 hidden">
+                <!-- Brand Column -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <img src="logo.png" alt="Latsize" class="w-8 h-8 object-contain">
+                        <span class="font-bold text-xl tracking-tight">Latsize</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        The AI-powered hiring platform that helps you screen, shortlist, and hire the best talent
+                        faster.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-mint-green transition-colors">
+                            <span class="material-symbols-outlined">public</span> <!-- Placeholder for social icon -->
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-mint-green transition-colors">
+                            <span class="material-symbols-outlined">share</span> <!-- Placeholder for social icon -->
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-mint-green transition-colors">
+                            <span class="material-symbols-outlined">mail</span> <!-- Placeholder for social icon -->
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Links Column 1 -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Product</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Features</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Integrations</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Enterprise</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Column 2 -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Company</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-mint-green transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links Column 3 -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Resources</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Community</a></li>
+                        <li><a href="#" class="hover:text-mint-green transition-colors">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2024 Latsize Inc. All rights reserved.</p>
+                <div class="flex gap-8 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition-colors">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div id="signin-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity" onclick="closeModals()"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-xl bg-white dark:bg-gray-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-gray-100 dark:border-gray-800">
+                    <button onclick="closeModals()"
+                        class="absolute top-4 right-4 text-gray-400 hover:text-navy dark:hover:text-white transition-colors z-10">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    <div class="px-8 py-10 sm:px-12 sm:py-12">
+                        <div class="flex flex-col items-center gap-6">
+                            <h2 class="text-navy dark:text-white text-[32px] font-bold leading-tight text-center">Sign
+                                In to Latsize</h2>
+                            <div class="flex w-full flex-col items-stretch gap-4">
+                                <label class="flex flex-col flex-1">
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal pb-2">
+                                        Email</p>
+                                    <input id="signin-email"
+                                        class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-navy dark:text-white focus:outline-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-mint-green focus:ring-2 focus:ring-mint-green/30 h-12 placeholder:text-gray-400 px-4 text-base font-normal leading-normal"
+                                        placeholder="you@company.com" />
+                                </label>
+                                <label class="flex flex-col flex-1">
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal pb-2">
+                                        Password</p>
+                                    <div class="relative">
+                                        <input id="signin-password"
+                                            class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-navy dark:text-white focus:outline-0 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-mint-green focus:ring-2 focus:ring-mint-green/30 h-12 placeholder:text-gray-400 px-4 text-base font-normal leading-normal"
+                                            placeholder="Enter your password" type="password" />
+                                        <button
+                                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600">
+                                            <span class="material-symbols-outlined text-xl">visibility_off</span>
+                                        </button>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="w-full">
+                                <a class="text-secondary dark:text-secondary/90 text-sm font-medium leading-normal hover:underline"
+                                    href="#">Forgot password?</a>
+                            </div>
+                            <button onclick="handleSignIn()"
+                                class="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-navy text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-slate-blue transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                                <span class="truncate">Sign In</span>
+                            </button>
+                            <p id="signin-error" class="text-red-500 text-sm text-center hidden"></p>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal leading-normal text-center">
+                                Don't have an account? <button onclick="openSignUp()"
+                                    class="font-bold text-secondary dark:text-secondary/90 hover:underline">Create
+                                    one</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signup-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity" onclick="closeModals()"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-xl bg-white dark:bg-gray-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-gray-100 dark:border-gray-800">
+                    <button onclick="closeModals()"
+                        class="absolute top-4 right-4 text-gray-400 hover:text-navy dark:hover:text-white transition-colors z-10">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    <div class="px-8 py-10 sm:px-10 sm:py-10">
+                        <div class="flex flex-col items-center">
+                            <h3
+                                class="text-navy dark:text-white text-2xl sm:text-3xl font-bold tracking-tight text-center pb-3">
+                                Create your Latsize account</h3>
+                            <div class="w-full pt-6">
+                                <button
+                                    class="flex h-12 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-5 text-gray-700 dark:text-gray-200 text-base font-medium leading-normal hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <svg class="h-5 w-5" fill="none" viewbox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.5777 12.2714C22.5777 11.4164 22.5077 10.5844 22.3677 9.77539H12.2178V14.4554H18.1577C17.9017 16.0354 17.0717 17.3914 15.8117 18.2614V21.1014H19.6517C21.5717 19.3304 22.5777 16.0964 22.5777 12.2714Z"
+                                            fill="#4285F4"></path>
+                                        <path
+                                            d="M12.2178 23.0002C15.1158 23.0002 17.5848 22.0392 19.6518 20.4282L15.8118 17.5882C14.8998 18.2272 13.6828 18.6352 12.2178 18.6352C9.42379 18.6352 7.07479 16.7192 6.24479 14.1682H2.28479V17.1082C4.26179 21.0852 7.92179 23.0002 12.2178 23.0002Z"
+                                            fill="#34A853"></path>
+                                        <path
+                                            d="M6.24476 14.1681C6.00276 13.4831 5.85976 12.7531 5.85976 11.9991C5.85976 11.2451 6.00276 10.5151 6.24476 9.83011V6.89011H2.28476C1.53676 8.34511 1.15176 10.1161 1.15176 11.9991C1.15176 13.8821 1.53676 15.6531 2.28476 17.1081L6.24476 14.1681Z"
+                                            fill="#FBBC05"></path>
+                                        <path
+                                            d="M12.2178 5.36489C13.7808 5.36489 15.2208 5.92089 16.3268 6.97889L19.7218 3.58389C17.5778 1.63889 15.1158 0.998886 12.2178 0.998886C7.92179 0.998886 4.26179 2.91389 2.28479 6.89089L6.24479 9.83089C7.07479 7.27989 9.42379 5.36489 12.2178 5.36489Z"
+                                            fill="#EA4335"></path>
+                                    </svg>
+                                    <span class="truncate">Continue with Google</span>
+                                </button>
+                            </div>
+                            <div class="relative flex w-full items-center justify-center py-6">
+                                <div class="absolute h-px w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <p
+                                    class="relative bg-white dark:bg-gray-900 px-4 text-sm font-normal text-gray-500 dark:text-gray-400">
+                                    or</p>
+                            </div>
+                            <div class="flex w-full flex-col gap-5">
+                                <label class="flex w-full flex-col">
+                                    <p class="pb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</p>
+                                    <input id="signup-name"
+                                        class="flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-navy dark:text-white placeholder:text-gray-400 focus:border-mint-green focus:ring-2 focus:ring-mint-green/20"
+                                        placeholder="Enter your full name" />
+                                </label>
+                                <label class="flex w-full flex-col">
+                                    <p class="pb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Work Email</p>
+                                    <input id="signup-email"
+                                        class="flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-navy dark:text-white placeholder:text-gray-400 focus:border-mint-green focus:ring-2 focus:ring-mint-green/20"
+                                        placeholder="Enter your work email" />
+                                </label>
+                                <label class="flex w-full flex-col">
+                                    <p class="pb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Password</p>
+                                    <div class="relative">
+                                        <input id="signup-password"
+                                            class="flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-navy dark:text-white placeholder:text-gray-400 focus:border-mint-green focus:ring-2 focus:ring-mint-green/20"
+                                            placeholder="Enter a strong password" type="password" />
+                                        <button
+                                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600">
+                                            <span class="material-symbols-outlined text-xl">visibility_off</span>
+                                        </button>
+                                    </div>
+                                </label>
+                                <label class="flex w-full flex-col">
+                                    <p class="pb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Confirm
+                                        Password</p>
+                                    <div class="relative">
+                                        <input id="signup-confirm-password"
+                                            class="flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-navy dark:text-white placeholder:text-gray-400 focus:border-mint-green focus:ring-2 focus:ring-mint-green/20"
+                                            placeholder="Confirm your password" type="password" />
+                                        <button
+                                            class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600">
+                                            <span class="material-symbols-outlined text-xl">visibility_off</span>
+                                        </button>
+                                    </div>
+                                </label>
+                                <button onclick="handleSignUp()"
+                                    class="flex h-12 min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-navy px-5 text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:bg-slate-blue focus:outline-none focus:ring-2 focus:ring-mint-green focus:ring-offset-2 dark:focus:ring-offset-gray-900 text-base font-bold leading-normal tracking-wide transition-all">
+                                    <span>Create Account</span>
+                                </button>
+                                <p id="signup-error" class="text-red-500 text-sm text-center hidden"></p>
+                            </div>
+                            <div class="pt-8 text-center">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    Already have an account?
+                                    <button onclick="openSignIn()"
+                                        class="font-medium text-secondary hover:underline">Sign in</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openSignIn() {
+            document.getElementById('signin-modal').classList.remove('hidden');
+            document.getElementById('signup-modal').classList.add('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openSignUp() {
+            document.getElementById('signup-modal').classList.remove('hidden');
+            document.getElementById('signin-modal').classList.add('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModals() {
+            document.getElementById('signin-modal').classList.add('hidden');
+            document.getElementById('signup-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeModals();
+            }
+        });
+
+        const API_BASE_URL = 'http://localhost:8000/api/v1';
+
+        async function handleSignIn() {
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+            const errorEl = document.getElementById('signin-error');
+
+            errorEl.classList.add('hidden');
+            errorEl.textContent = '';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Login failed');
+                }
+
+                // Store token in localStorage and Cookie
+                localStorage.setItem('token', data.access_token);
+                document.cookie = `token=${data.access_token}; path=/; max-age=604800; SameSite=Lax`; // 7 days
+
+                // Close modal and redirect to dashboard
+                closeModals();
+                // alert('Successfully signed in!');
+                window.location.href = 'http://localhost:4000/dashboard';
+
+            } catch (err) {
+                errorEl.textContent = err.message;
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        async function handleSignUp() {
+            const fullName = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            const errorEl = document.getElementById('signup-error');
+
+            errorEl.classList.add('hidden');
+            errorEl.textContent = '';
+
+            // Validate password confirmation
+            if (password !== confirmPassword) {
+                errorEl.textContent = "Passwords don't match";
+                errorEl.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email,
+                        full_name: fullName,
+                        password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Signup failed');
+                }
+
+                // Auto login logic (simulated by using the returned user data if token was present, but signup returns user)
+                // Since signup doesn't return token, we must ask to sign in OR we could modify backend to return token.
+                // For now, let's stick to the plan: "Account created successfully! Please sign in."
+                // BUT, to make it seamless as requested "land on the dashboard page", we should probably auto-login.
+                // However, I didn't modify signup to return a token.
+                // So I will auto-trigger login if I have the password.
+
+                // Auto-login
+                const loginResponse = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const loginData = await loginResponse.json();
+
+                if (loginResponse.ok && loginData.access_token) {
+                    localStorage.setItem('token', loginData.access_token);
+                    document.cookie = `token=${loginData.access_token}; path=/; max-age=604800; SameSite=Lax`;
+                    window.location.href = 'http://localhost:4000/dashboard';
+                } else {
+                    alert('Account created! Please sign in.');
+                    openSignIn();
+                }
+
+            } catch (err) {
+                errorEl.textContent = err.message;
+                errorEl.classList.remove('hidden');
+            }
+        }
+    </script>
+
+</body>
+
+</html>

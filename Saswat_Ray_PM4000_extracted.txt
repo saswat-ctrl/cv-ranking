@@ -1,0 +1,107 @@
+Saswat Ray
+Product Manager
+Product Manager with 5+ years of experience across Fintech (Automobile Financing & 
+Co-lending), Payments, Leasing, Recruitment-Tech, Employer Branding, Insurance & 
+FMCG. I currently play an AI centric role, leading AI-ML POCs & Projects in Info Edge, 
+for Ambitionbox BU. I possess work experience across multiple geographies including 
+Indonesia, Philippines & India. I have completed my MBA from IIM Kozhikode
+WORK HISTORY
+Product Manager - II
+Noida, India 
+Info Edge: Led B2C, AI ML Initiatives for Ambitionbox
+January 2025 - Ongoing
+Led high-ROI initiatives: Embedding Financials, Social Media Posts for 2L+ companies, leading to 5L+ increase in MAU
+•
+Pioneered 2X traffic growth for Company Comparison pages on Ambitionbox - leveraging Naukri’s & IIMJob’s distribution
+•
+Reduced thin data Company pages by 25% while leading Data Enrichment exercise using 4o-mini, Perplexity, 4o + web
+•
+Demonstrated 50% reduction in Product Launch TAT by leveraging AI-based coding tools like Replit, Lovable & Bolt
+•
+EDUCATION
+Master of Business Administration (MBA)
+Kozhikode, India 
+Indian Institute of Management, Kozhikode (IIMK)
+July 2020 - April 2022
+National Runner-up out of 20K+ students, HUL LIME XII (India's #1 B-School Competition); got Unilever PPI 
+•
+National Semi-Finalist, Hindustan Coca-Cola Beverages Case Challenge - Top 20 out of 5500+ teams
+•
+Received a PPI from Nestlé for implementing the 1st Pan-India helpline toll-free to address pet nutrition queries
+•
+Top 10 out of 480+ students to emerge as Campus Finalists in Accenture Strategy Case Competition
+•
+Bachelor of Technology (B.Tech)
+Bhubaneswar, India 
+College of Engineering & Technology (CET)
+August 2013 - August 2017
+Top 2%ile out of 100,000+ applicants to receive the Technical Merit Scholarship by Govt. of Odisha 
+•
+Raised sponsorship of over INR 400K for college fest from over 20 sponsors such as the East Coast Railway and Titan
+•
+Succeeded in the OJEE Engineering Examination by being in the Top 2 %ile of more than 100K  total applicants
+•
+TOOLS
+n8n /langchain
+JIRA
+Firebase
+PowerBI
+GA4/MP
+Claude /Chat GPT
+3rd Party API Integrations
+Replit/Lovable/Bolt
+E: saswat.careers@gmail.com
+M: +918895594234
+L: www.linkedin.com/in/saswatray
+Systems Engineer
+Hyderabad, India 
+Tata Consultancy Services: Medical Equipment Financing
+November 2017 - February 2019
+Led 20+ product release demonstrations, addressing the user queries & gathering pre-release client feedback 
+•
+Formulated a change management strategy on ServiceNow dashboard leading to 50% process improvement
+•
+Spearheaded over 70 patch release deployments in Production, UAT and SIT environments of the application
+•
+Automated 65% of the test case scenarios at a net-zero cost using an open-source application called Selenium
+•
+Optimized the overall execution time for 50 testing scenarios from 14 to 2 hours by remodeling the testing mix
+•
+Awarded with ‘TCS Gems’ for leveraging PowerBI to create real-time P&L and sales management dashboards
+•
+Product Manager
+Gurugram , India  | Jakarta, ID
+Cardekho Group: APEC (Indonesia & Philippines NBFC /Co-lending)
+April 2022 - January 2025
+Launched Salesforce App for Indonesia market to automate loan creation; drove adoption to 100% in 3 mths.
+•
+Curated uniﬁed loan processing journey for used-car dealers, customers; leading to 15X increase in B2C leads
+•
+Integrated & trained AI based document classiﬁcation model to reduce MOM Fraud value by ~120K USD
+•
+Drove 3rd party API Integrations with Partner Banks & NBFCs partners to reduce Loan Processing TAT by 75%
+•
+Developed real-time reporting platforms for Sales & SLT, leading to accurate reviews & faster decision making.
+•
+Employed the Xendit-based Payment Gateway to reduce payments TAT & reconciliation efforts signiﬁcantly
+•
+Collaborated with 5+ teams to create the Product Roadmap; prioritizing the backlog items for sprint planning
+•
+Spearheaded creation of 3 GenAI apps across Sales Support, Knowledge management and IT Helpdesk for Sales
+•
+Received Cardekho DELITE Award in the Innovative category out of 100+ members of PM, engineering & design teams
+•
+Led the LOS & LMS Integrations with 4 key vendors in Philippines & Indonesia for the Consumer Financing business
+•
+Led the launch of Dealer Wallet across Indonesia, leading to ~80% decreased reliability on the working cap credit line  
+•
+Associate Product Manager
+Remote, India
+AAPBOX.AI LLC
+February 2019 - June 2020
+Ideated & launched Backlog Prioritization App on Atlassian’s JIRA  marketplace, driving adoption across 2,000+ B2B clients
+•
+Led 25+ demos for Backlog Prioritization & JIRA Checklist, achieving 50%+ client conversion and strengthening adoption
+•
+Interacted with 40+ Indian JIRA clients at 5 Atlassian conferences, uncovering key needs and shaping the product roadmap
+•
