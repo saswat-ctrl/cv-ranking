@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Latsize Sign Up Modal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Poppins:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0b2447",
+              "background-light": "#f6f7f8",
+              "background-dark": "#121820",
+              "accent": "#00C2A8",
+              "secondary": "#5563FF",
+              "text-slate": "#6B7280",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "heading": ["Poppins", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display">
+<div class="relative flex min-h-screen w-full flex-col items-center justify-center bg-background-light dark:bg-background-dark p-4 sm:p-6" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqQtgXHZox_zzjxrBXsRevtwTDPHQB3rr0FSw_lKhkQ-cM4OFd1OrN4GEa-c3TkX60q-THQUIlUPXUYq6_VKK30WcWQDGaMzsvlYm9k45cgfJgZdBUxoN5tb7MZufI6_FpBFb9rtJad3xty02CZSYieAzHURoTH_wQgOREGQjgwnqZSZ6KxgGq2YiCDOEW9daskPf4C6FWtUJuzfp9PPaekrXjrp3ICTup8X8EQbNju9LQM31Qqkaglhze99mxRFV2Jls4brL59ui5'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+<div class="relative w-full max-w-md rounded-xl bg-white dark:bg-gray-900 shadow-2xl p-8 sm:p-10">
+<div class="flex flex-col items-center">
+<h3 class="text-slate-900 dark:text-white text-2xl sm:text-3xl font-bold font-heading tracking-tight text-center pb-3">Create your Latsize account</h3>
+<div class="w-full pt-6">
+<button class="flex h-12 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-5 text-slate-700 dark:text-slate-200 text-base font-medium leading-normal hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<svg class="h-5 w-5" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.5777 12.2714C22.5777 11.4164 22.5077 10.5844 22.3677 9.77539H12.2178V14.4554H18.1577C17.9017 16.0354 17.0717 17.3914 15.8117 18.2614V21.1014H19.6517C21.5717 19.3304 22.5777 16.0964 22.5777 12.2714Z" fill="#4285F4"></path>
+<path d="M12.2178 23.0002C15.1158 23.0002 17.5848 22.0392 19.6518 20.4282L15.8118 17.5882C14.8998 18.2272 13.6828 18.6352 12.2178 18.6352C9.42379 18.6352 7.07479 16.7192 6.24479 14.1682H2.28479V17.1082C4.26179 21.0852 7.92179 23.0002 12.2178 23.0002Z" fill="#34A853"></path>
+<path d="M6.24476 14.1681C6.00276 13.4831 5.85976 12.7531 5.85976 11.9991C5.85976 11.2451 6.00276 10.5151 6.24476 9.83011V6.89011H2.28476C1.53676 8.34511 1.15176 10.1161 1.15176 11.9991C1.15176 13.8821 1.53676 15.6531 2.28476 17.1081L6.24476 14.1681Z" fill="#FBBC05"></path>
+<path d="M12.2178 5.36489C13.7808 5.36489 15.2208 5.92089 16.3268 6.97889L19.7218 3.58389C17.5778 1.63889 15.1158 0.998886 12.2178 0.998886C7.92179 0.998886 4.26179 2.91389 2.28479 6.89089L6.24479 9.83089C7.07479 7.27989 9.42379 5.36489 12.2178 5.36489Z" fill="#EA4335"></path>
+</svg>
+<span class="truncate">Continue with Google</span>
+</button>
+</div>
+<div class="relative flex w-full items-center justify-center py-6">
+<div class="absolute h-px w-full bg-gray-200 dark:bg-gray-700"></div>
+<p class="relative bg-white dark:bg-gray-900 px-4 text-sm font-normal text-text-slate dark:text-gray-400">or</p>
+</div>
+<div class="flex w-full flex-col gap-5">
+<label class="flex w-full flex-col">
+<p class="pb-2 text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</p>
+<input class="form-input flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-secondary focus:ring-2 focus:ring-secondary/20" placeholder="Enter your full name" value=""/>
+</label>
+<label class="flex w-full flex-col">
+<p class="pb-2 text-sm font-medium text-slate-700 dark:text-slate-300">Work Email</p>
+<input class="form-input flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-secondary focus:ring-2 focus:ring-secondary/20" placeholder="Enter your work email" value=""/>
+</label>
+<label class="flex w-full flex-col">
+<p class="pb-2 text-sm font-medium text-slate-700 dark:text-slate-300">Company <span class="text-text-slate">(optional)</span></p>
+<input class="form-input flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-secondary focus:ring-2 focus:ring-secondary/20" placeholder="Enter your company name" value=""/>
+</label>
+<div class="flex w-full flex-col">
+<label class="flex flex-col">
+<p class="pb-2 text-sm font-medium text-slate-700 dark:text-slate-300">Password</p>
+<div class="relative">
+<input class="form-input flex h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 p-3 text-base font-normal text-slate-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-secondary focus:ring-2 focus:ring-secondary/20" placeholder="Enter a strong password" type="password" value="password123"/>
+<button class="absolute inset-y-0 right-0 flex items-center pr-3 text-text-slate hover:text-slate-700 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-xl">visibility_off</span>
+</button>
+</div>
+</label>
+<div class="mt-2 flex items-center gap-x-2">
+<div class="h-1.5 flex-1 rounded-full bg-gray-200 dark:bg-gray-700">
+<div class="h-1.5 w-2/3 rounded-full bg-accent"></div>
+</div>
+<p class="text-xs font-medium text-accent">Good</p>
+</div>
+</div>
+<button class="flex h-12 min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-5 text-white shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 dark:focus:ring-offset-gray-900 text-base font-bold leading-normal tracking-wide transition-colors">
+<span>Create Account</span>
+</button>
+</div>
+</div>
+<div class="pt-8 text-center">
+<p class="text-sm text-text-slate dark:text-gray-400">
+                    Already have an account? 
+                    <a class="font-medium text-secondary hover:underline" href="#">Sign in</a>
+</p>
+</div>
+</div>
+</div>
+</body></html>

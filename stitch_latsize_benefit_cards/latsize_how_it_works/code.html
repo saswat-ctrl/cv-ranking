@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Latsize How it Works</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Poppins:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+    .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0b2447",
+            "background-light": "#f6f7f8",
+            "background-dark": "#121820",
+            "accent": "#00C2A8",
+            "secondary": "#5563FF",
+            "warm-slate": "#6B7280"
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col items-center justify-center group/design-root overflow-x-hidden p-4 sm:p-6 md:p-8">
+<div class="layout-container flex h-full grow flex-col w-full">
+<div class="flex flex-1 justify-center py-10 sm:py-16 md:py-20">
+<div class="layout-content-container flex flex-col max-w-5xl flex-1 items-center">
+<!-- SectionHeader Component -->
+<h1 class="text-[#0e131a] dark:text-white text-3xl sm:text-4xl font-poppins font-bold leading-tight tracking-tight text-center pb-4 sm:pb-6 md:pb-8">Get the Perfect Hire in 3 Simple Steps</h1>
+<!-- TextGrid Component -->
+<div class="grid w-full grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 p-4 relative">
+<!-- Connector Lines -->
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-px -translate-y-1/2">
+<svg class="absolute top-1/2 left-0 -translate-y-[calc(50%+48px)]" height="2" width="100%">
+<line stroke="#d1dae6" stroke-dasharray="8 8" stroke-width="2" x1="16.66%" x2="83.33%" y1="1" y2="1"></line>
+</svg>
+</div>
+<!-- Step 1 -->
+<div class="relative flex flex-1 flex-col gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-center items-center shadow-sm">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white mb-2">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#0e131a] dark:text-white text-lg font-bold leading-tight">1. Provide the Job Description</h2>
+<p class="text-warm-slate dark:text-slate-400 text-sm font-normal leading-normal">
+                  Upload your job description and our AI will instantly analyze it for the key skills and requirements needed.
+                </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-1 flex-col gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-center items-center shadow-sm">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white mb-2">
+<span class="material-symbols-outlined text-3xl">group</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#0e131a] dark:text-white text-lg font-bold leading-tight">2. Add Your Candidate Pool</h2>
+<p class="text-warm-slate dark:text-slate-400 text-sm font-normal leading-normal">
+                  Easily upload multiple candidate CVs at once or connect to your existing Applicant Tracking System.
+                </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative flex flex-1 flex-col gap-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-center items-center shadow-sm">
+<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white mb-2">
+<span class="material-symbols-outlined text-3xl">format_list_numbered</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#0e131a] dark:text-white text-lg font-bold leading-tight">3. Receive Your Shortlist</h2>
+<p class="text-warm-slate dark:text-slate-400 text-sm font-normal leading-normal">
+                  Get an instantly generated, ranked list of the most suitable candidates with detailed match scores.
+                </p>
+</div>
+</div>
+</div>
+<!-- SingleButton Component -->
+<div class="flex px-4 py-8 sm:py-10 md:py-12 justify-center">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-accent text-primary text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-colors">
+<span class="truncate">Start Hiring Smarter</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

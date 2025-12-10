@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Latsize Landing Page Hero</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19c29d",
+                        "background-light": "#F5F8FA",
+                        "background-dark": "#11211d",
+                        "navy": "#0E1C36",
+                        "mint-green": "#19C29C",
+                        "slate-blue": "#1A2B48"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'soft': '0 8px 30px rgb(0,0,0,0.04)',
+                        'soft-hover': '0 8px 30px rgb(0,0,0,0.08)',
+                        'glow': '0 0 20px rgba(25, 194, 157, 0.3)'
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(25, 194, 156, 0.05) 0%, rgba(245, 248, 250, 0) 50%);
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light text-navy antialiased overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div
+                        class="w-8 h-8 bg-mint-green rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                        L</div>
+                    <span class="font-bold text-xl tracking-tight text-navy">Latsize</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-navy font-medium transition-colors">Product</a>
+                    <a href="#" class="text-gray-600 hover:text-navy font-medium transition-colors">Solutions</a>
+                    <a href="#" class="text-gray-600 hover:text-navy font-medium transition-colors">Pricing</a>
+                    <a href="#" class="text-gray-600 hover:text-navy font-medium transition-colors">Resources</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#" class="text-navy font-semibold hover:text-mint-green transition-colors">Sign In</a>
+                    <button
+                        class="bg-navy text-white px-5 py-2.5 rounded-xl font-semibold hover:bg-slate-blue hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-navy">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="pt-32 pb-20 lg:pt-40 lg:pb-28 relative hero-gradient">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+
+            <!-- Badge -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-8 animate-fade-in-up">
+                <span class="flex h-2 w-2 rounded-full bg-mint-green"></span>
+                <span class="text-sm font-medium text-gray-600">New: AI-Powered Candidate Matching 2.0</span>
+            </div>
+
+            <!-- Headline -->
+            <h1
+                class="text-5xl md:text-6xl lg:text-7xl font-black text-navy tracking-tight mb-6 max-w-5xl leading-[1.1]">
+                The AI-Powered ATS for <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-navy to-mint-green">Modern
+                    Recruiters</span>
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed">
+                Screen resumes instantly, shortlist the best talent, and hire faster—without the manual grind. Join
+                thousands of recruiters hiring smarter.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center mb-16">
+                <button
+                    class="bg-navy text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                    Start Hiring for Free
+                    <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                </button>
+                <button
+                    class="bg-white text-navy border border-gray-200 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-xl">play_circle</span>
+                    Watch Demo
+                </button>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="flex flex-col items-center gap-4 mb-20">
+                <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Trusted by 500+ agencies & HR
+                    teams</p>
+                <div
+                    class="flex flex-wrap justify-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <!-- Placeholder Logos -->
+                    <div class="h-8 w-24 bg-gray-300 rounded"></div>
+                    <div class="h-8 w-24 bg-gray-300 rounded"></div>
+                    <div class="h-8 w-24 bg-gray-300 rounded"></div>
+                    <div class="h-8 w-24 bg-gray-300 rounded"></div>
+                    <div class="h-8 w-24 bg-gray-300 rounded"></div>
+                </div>
+            </div>
+
+            <!-- Hero Image / Dashboard Preview -->
+            <div class="relative w-full max-w-6xl mx-auto">
+                <!-- Glow Effect -->
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-mint-green to-navy rounded-[2.5rem] blur opacity-20">
+                </div>
+
+                <!-- Main Image Container -->
+                <div
+                    class="relative bg-white rounded-[2rem] shadow-2xl border border-gray-200 overflow-hidden aspect-[16/9] flex items-center justify-center bg-gray-50">
+
+                    <!-- Mock UI Structure -->
+                    <div class="w-full h-full flex flex-col">
+                        <!-- Mock Header -->
+                        <div class="h-14 border-b border-gray-100 flex items-center px-6 gap-4 bg-white">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                            </div>
+                            <div class="h-2 w-64 bg-gray-100 rounded-full ml-4"></div>
+                        </div>
+
+                        <!-- Mock Content -->
+                        <div class="flex-1 flex">
+                            <!-- Sidebar -->
+                            <div class="w-64 border-r border-gray-100 bg-gray-50/50 p-6 flex flex-col gap-4">
+                                <div class="h-8 w-32 bg-gray-200 rounded mb-4"></div>
+                                <div class="h-4 w-full bg-gray-100 rounded"></div>
+                                <div class="h-4 w-3/4 bg-gray-100 rounded"></div>
+                                <div class="h-4 w-5/6 bg-gray-100 rounded"></div>
+                            </div>
+
+                            <!-- Main Area -->
+                            <div class="flex-1 p-8 bg-white">
+                                <div class="flex justify-between mb-8">
+                                    <div class="h-8 w-48 bg-gray-200 rounded"></div>
+                                    <div class="h-8 w-24 bg-mint-green/20 rounded"></div>
+                                </div>
+
+                                <!-- Cards Grid -->
+                                <div class="grid grid-cols-3 gap-6">
+                                    <div class="h-40 bg-white border border-gray-100 rounded-xl shadow-soft p-4">
+                                        <div class="h-10 w-10 bg-gray-100 rounded-full mb-3"></div>
+                                        <div class="h-4 w-3/4 bg-gray-100 rounded mb-2"></div>
+                                        <div class="h-3 w-1/2 bg-gray-50 rounded"></div>
+                                    </div>
+                                    <div class="h-40 bg-white border border-gray-100 rounded-xl shadow-soft p-4">
+                                        <div class="h-10 w-10 bg-gray-100 rounded-full mb-3"></div>
+                                        <div class="h-4 w-3/4 bg-gray-100 rounded mb-2"></div>
+                                        <div class="h-3 w-1/2 bg-gray-50 rounded"></div>
+                                    </div>
+                                    <div class="h-40 bg-white border border-gray-100 rounded-xl shadow-soft p-4">
+                                        <div class="h-10 w-10 bg-gray-100 rounded-full mb-3"></div>
+                                        <div class="h-4 w-3/4 bg-gray-100 rounded mb-2"></div>
+                                        <div class="h-3 w-1/2 bg-gray-50 rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overlay Text (Optional) -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span
+                            class="bg-white/90 backdrop-blur px-6 py-3 rounded-xl shadow-lg text-sm font-medium text-gray-500 border border-gray-100">
+                            Interactive Dashboard Preview
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

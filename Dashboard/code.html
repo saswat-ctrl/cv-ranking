@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Cleaned HR Dashboard</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#16a34a", // green-600
+            "background-light": "#f8fafc", // slate-50
+            "background-dark": "#0f172a", // slate-900
+          },
+          fontFamily: {
+            display: ["Inter", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem", // 8px
+          },
+        },
+      },
+    };
+  </script>
+  <style type="text/tailwindcss">
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200">
+  <div class="flex h-screen">
+    <aside
+      class="w-20 flex flex-col items-center border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+      <div class="h-16 flex items-center justify-center border-b border-slate-200 dark:border-slate-800 w-full">
+        <div class="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center font-bold text-white">
+          L
+        </div>
+      </div>
+      <nav class="flex-1 flex flex-col items-center w-full py-6 space-y-4">
+        <a class="flex items-center justify-center p-3 rounded text-primary bg-green-100 dark:bg-green-900/50" href="#">
+          <span class="material-symbols-outlined text-2xl">dashboard</span>
+          <span class="sr-only">Dashboard</span>
+        </a>
+        <a class="flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+          href="#">
+          <span class="material-symbols-outlined text-2xl">work</span>
+          <span class="sr-only">Jobs</span>
+        </a>
+        <a class="flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+          href="#">
+          <span class="material-symbols-outlined text-2xl">settings</span>
+          <span class="sr-only">Settings</span>
+        </a>
+      </nav>
+      <div class="py-4 border-t border-slate-200 dark:border-slate-800 w-full flex justify-center">
+        <a class="flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+          href="#">
+          <span class="material-symbols-outlined text-2xl">logout</span>
+          <span class="sr-only">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <main class="flex-1 overflow-y-auto">
+      <header
+        class="sticky top-0 z-10 flex items-center justify-between h-16 px-8 border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+        <div>
+          <h2 class="text-xl font-semibold text-slate-900 dark:text-white">Welcome to HR CV Shortlisting</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Here's a summary of your hiring activity.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-600 dark:text-slate-300">
+            N
+          </div>
+        </div>
+      </header>
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-8">
+          <div>
+          </div>
+          <div class="flex gap-2">
+            <button
+              class="px-4 py-2 text-sm font-medium border rounded border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700">Test
+              Auth</button>
+            <button
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded bg-primary hover:bg-green-700">
+              <span class="material-symbols-outlined text-base">add</span>
+              Create New Job
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-3">
+          <div class="p-6 bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-medium text-slate-600 dark:text-slate-400">Total Jobs</h4>
+              <div class="p-2 rounded-full bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400">
+                <span class="material-symbols-outlined text-base">work</span>
+              </div>
+            </div>
+            <p class="text-4xl font-bold text-slate-900 dark:text-white">1</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Active job posting</p>
+          </div>
+          <div class="p-6 bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-medium text-slate-600 dark:text-slate-400">Candidates Ranked</h4>
+              <div class="p-2 rounded-full bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400">
+                <span class="material-symbols-outlined text-base">groups</span>
+              </div>
+            </div>
+            <p class="text-4xl font-bold text-slate-900 dark:text-white">2</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">CVs processed</p>
+          </div>
+          <div class="p-6 bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-between mb-4">
+              <h4 class="font-medium text-slate-600 dark:text-slate-400">Avg Match Score</h4>
+              <div class="p-2 rounded-full bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-400">
+                <span class="material-symbols-outlined text-base">trending_up</span>
+              </div>
+            </div>
+            <p class="text-4xl font-bold text-slate-900 dark:text-white">85%</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Across all rankings</p>
+          </div>
+        </div>
+        <div class="bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+          <div class="p-6 border-b border-slate-200 dark:border-slate-800">
+            <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Recent Jobs</h4>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Your most recently created job postings</p>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead class="text-xs uppercase text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800">
+                <tr>
+                  <th class="px-6 py-3" scope="col">Job Title</th>
+                  <th class="px-6 py-3" scope="col">Date Created</th>
+                  <th class="px-6 py-3" scope="col">Status</th>
+                  <th class="px-6 py-3" scope="col"><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="bg-white border-b dark:bg-slate-900 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="px-6 py-4 font-medium text-primary hover:underline">
+                    <a href="#">SPM</a>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">10/12/2025</td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                      OPEN
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-right">
+                    <a class="font-medium text-primary hover:underline" href="#">View</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="p-4 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+            <a class="font-medium text-primary hover:underline" href="#">View all jobs</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Latsize Benefit Cards</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Poppins:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0b2447",
+              "background-light": "#f6f7f8",
+              "background-dark": "#121820",
+              "accent": "#00C2A8",
+              "secondary": "#5563FF",
+              "text-slate": "#6B7280"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "heading": ["Poppins", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display">
+<div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-16 sm:py-20 md:py-24">
+<div class="layout-content-container flex flex-col w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+<!-- Section Header -->
+<div class="text-center">
+<h2 class="text-primary dark:text-white text-3xl sm:text-4xl font-bold font-heading tracking-tight">Unlock Your Recruiting Superpowers</h2>
+<p class="text-text-slate dark:text-gray-300 text-lg font-normal leading-relaxed mt-4 max-w-2xl mx-auto">
+            Discover how Latsize's core features deliver tangible value and transform your hiring process.
+          </p>
+</div>
+<!-- Text Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12 sm:mt-16">
+<!-- Card 1: Unmatched Speed -->
+<div class="flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark p-6 transition-shadow hover:shadow-lg">
+<div class="flex items-center justify-center h-12 w-12 rounded-lg bg-accent/10">
+<span class="material-symbols-outlined text-accent text-3xl">bolt</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-primary dark:text-white text-xl font-bold font-heading">Unmatched Speed</h3>
+<p class="text-text-slate dark:text-gray-400 text-base font-normal leading-relaxed">
+                Accelerate your hiring process, reduce time-to-hire, and automate candidate sourcing with our powerful AI.
+              </p>
+</div>
+</div>
+<!-- Card 2: Explainable AI -->
+<div class="flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark p-6 transition-shadow hover:shadow-lg">
+<div class="flex items-center justify-center h-12 w-12 rounded-lg bg-secondary/10">
+<span class="material-symbols-outlined text-secondary text-3xl">psychology</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-primary dark:text-white text-xl font-bold font-heading">Explainable AI</h3>
+<p class="text-text-slate dark:text-gray-400 text-base font-normal leading-relaxed">
+                Gain transparent, data-backed insights into every candidate match, removing bias and building trust in your decisions.
+              </p>
+</div>
+</div>
+<!-- Card 3: Privacy First -->
+<div class="flex flex-col gap-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark p-6 transition-shadow hover:shadow-lg">
+<div class="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
+<span class="material-symbols-outlined text-primary dark:text-accent text-3xl">shield</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="text-primary dark:text-white text-xl font-bold font-heading">Privacy First</h3>
+<p class="text-text-slate dark:text-gray-400 text-base font-normal leading-relaxed">
+                Rest assured with our commitment to data security, GDPR compliance, and the protection of all user information.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>
