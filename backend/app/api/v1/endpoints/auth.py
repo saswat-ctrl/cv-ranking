@@ -34,6 +34,10 @@ async def signup(
         name=user_in.full_name,
         is_verified=True # Auto-verify for MVP
     )
+    
+    if user_in.password:
+        user.hashed_password = security.get_password_hash(user_in.password)
+        
     db.add(user)
     await db.commit()
     await db.refresh(user)

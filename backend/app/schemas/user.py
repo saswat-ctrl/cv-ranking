@@ -9,7 +9,7 @@ class UserBase(BaseModel):
 
 # Properties to receive via API on creation
 class UserCreate(UserBase):
-    pass
+    password: Optional[str] = None
 
 # Properties to receive via API on password set
 class UserSetPassword(BaseModel):

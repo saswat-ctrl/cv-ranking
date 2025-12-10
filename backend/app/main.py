@@ -117,14 +117,9 @@ async def general_exception_handler(request: Request, exc: Exception):
 #   CORS failures on the frontend.
 # - Instead, we explicitly list the frontend origin(s) we want to allow.
 
-frontend_origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=frontend_origins,
+    allow_origins=[str(origin).rstrip('/') for origin in settings.BACKEND_CORS_ORIGINS],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

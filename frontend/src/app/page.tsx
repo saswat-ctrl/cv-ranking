@@ -11,17 +11,17 @@ export default function HomePage() {
         const token = localStorage.getItem('token');
 
         if (token) {
-            // User is authenticated, redirect to dashboard
+            // Redirect authenticated users to dashboard
             router.push('/dashboard');
         } else {
-            // User is not authenticated, redirect to login
-            router.push('/login');
+            // Redirect to the static landing page for non-authenticated users
+            window.location.href = '/landing.html';
         }
     }, [router]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="text-gray-600">Redirecting...</div>
+        <div className="flex items-center justify-center min-h-screen">
+            <p>Redirecting...</p>
         </div>
     );
 }

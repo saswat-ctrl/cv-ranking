@@ -1,11 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --background: 0 0% 100%;
+  --background: 210 40% 98%;
+  /* slate-50 */
+  --background-light: 210 40% 98%;
+  --background-dark: 222 47% 11%;
+  /* slate-900 */
   --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
+  --primary: 142 71% 45%;
+  /* green-600 #16a34a */
   --primary-foreground: 210 40% 98%;
   --secondary: 210 40% 96.1%;
   --secondary-foreground: 222.2 47.4% 11.2%;
@@ -17,7 +28,8 @@
   --destructive-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 221.2 83.2% 53.3%;
+  --ring: 142 71% 45%;
+  /* green-600 */
   --radius: 0.5rem;
 }
 
@@ -27,6 +39,54 @@ body {
   font-family: Inter, system-ui, sans-serif;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Tooltip styles for navigation */
+.nav-item {
+  position: relative;
+}
+
+.nav-item .tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgb(15 23 42);
+  color: white;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 50;
+}
+
+.nav-item .tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0.375rem solid transparent;
+  border-right-color: rgb(15 23 42);
+}
+
+.nav-item:hover .tooltip {
+  opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nav-item .tooltip {
+    background-color: rgb(51 65 85);
+  }
+
+  .nav-item .tooltip::before {
+    border-right-color: rgb(51 65 85);
+  }
+}

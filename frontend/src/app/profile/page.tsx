@@ -26,7 +26,7 @@ export default function ProfilePage() {
 
     const handleLogout = () => {
         Cookies.remove('token');
-        router.push('/login');
+        router.push('/');
     };
 
     if (isLoading) return <div className="p-8">Loading...</div>;

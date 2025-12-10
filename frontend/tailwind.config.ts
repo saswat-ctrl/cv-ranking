@@ -24,7 +24,7 @@ const config: Config = {
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
                 primary: {
-                    DEFAULT: "hsl(var(--primary))",
+                    DEFAULT: "#16a34a", // green-600
                     foreground: "hsl(var(--primary-foreground))",
                 },
                 secondary: {
@@ -51,11 +51,18 @@ const config: Config = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
+                // Custom colors from code.html
+                "background-light": "#f8fafc", // slate-50
+                "background-dark": "#0f172a", // slate-900
+            },
+            fontFamily: {
+                display: ["Inter", "sans-serif"],
             },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+                DEFAULT: "0.5rem", // 8px
             },
             keyframes: {
                 "accordion-down": {
