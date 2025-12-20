@@ -30,19 +30,24 @@ jobs:
         poetry config virtualenvs.create true
         poetry config virtualenvs.in-project true
 
-    - name: Load cached venv
-      id: cached-poetry-dependencies
+    - name: Cache Poetry cache
       uses: actions/cache@v4
       with:
-        path: backend/.venv
-        key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+        path: ~/.cache/pypoetry
+        key: poetry-cache-${{ runner.os }}-${{ hashFiles('backend/poetry.lock') }}
+        restore-keys: |
+          poetry-cache-${{ runner.os }}-
+
+    - name: Cache Pip cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: pip-cache-${{ runner.os }}-${{ hashFiles('backend/poetry.lock') }}
+        restore-keys: |
+          pip-cache-${{ runner.os }}-
 
     - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction --no-root
-
-    - name: Install project
-      run: poetry install --no-interaction
+      run: poetry install --no-interaction --with dev
 
     - name: Run Linters
       run: |
