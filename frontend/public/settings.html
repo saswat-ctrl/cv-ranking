@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Settings - HR Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#16a34a", // green-600
+                        "background-light": "#f8fafc", // slate-50
+                        "background-dark": "#0f172a", // slate-900
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem", // 8px
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Tooltip styles */
+    .nav-item {
+        position: relative;
+    }
+    
+    .nav-item .tooltip {
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        background-color: rgb(15 23 42);
+        color: white;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+        z-index: 50;
+    }
+    
+    .nav-item .tooltip::before {
+        content: '';
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 0.375rem solid transparent;
+        border-right-color: rgb(15 23 42);
+    }
+    
+    .nav-item:hover .tooltip {
+        opacity: 1;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .nav-item .tooltip {
+        background-color: rgb(51 65 85);
+        }
+        .nav-item .tooltip::before {
+        border-right-color: rgb(51 65 85);
+        }
+    }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200">
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: white;">
+        <div
+            style="height: 64px; width: 64px; border-radius: 50%; border: 4px solid #e5e7eb; border-top-color: #16a34a; animation: spin 1s linear infinite;">
+        </div>
+        <style>
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </div>
+    <div class="flex h-screen">
+        <aside
+            class="w-20 flex flex-col items-center border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+            <div class="h-16 flex items-center justify-center border-b border-slate-200 dark:border-slate-800 w-full">
+                <img src="logo.png" alt="HR Dashboard Logo" class="w-12 h-12 object-contain" />
+            </div>
+            <nav class="flex-1 flex flex-col items-center w-full py-6 space-y-4">
+                <a class="nav-item flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    href="/dashboard">
+                    <span class="material-symbols-outlined text-2xl">dashboard</span>
+                    <span class="sr-only">Dashboard</span>
+                    <span class="tooltip">Dashboard</span>
+                </a>
+                <a class="nav-item flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    href="/jobs">
+                    <span class="material-symbols-outlined text-2xl">work</span>
+                    <span class="sr-only">Jobs</span>
+                    <span class="tooltip">Jobs</span>
+                </a>
+                <a class="nav-item flex items-center justify-center p-3 rounded text-primary bg-green-100 dark:bg-green-900/50"
+                    href="/settings">
+                    <span class="material-symbols-outlined text-2xl">settings</span>
+                    <span class="sr-only">Settings</span>
+                    <span class="tooltip">Settings</span>
+                </a>
+            </nav>
+            <div class="py-4 border-t border-slate-200 dark:border-slate-800 w-full flex justify-center">
+                <a id="logout-btn"
+                    class="nav-item flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    href="#">
+                    <span class="material-symbols-outlined text-2xl">logout</span>
+                    <span class="sr-only">Logout</span>
+                    <span class="tooltip">Logout</span>
+                </a>
+            </div>
+        </aside>
+        <main class="flex-1 overflow-hidden flex flex-col h-screen">
+            <header
+                class="flex-none flex items-center justify-between h-16 px-8 border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+                <div>
+                    <h2 class="text-xl font-semibold text-slate-900 dark:text-white">Settings</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Manage your account preferences</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <a href="/profile"
+                        class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-600 dark:text-slate-300 hover:ring-2 hover:ring-primary hover:ring-offset-2 hover:ring-offset-background-light dark:hover:ring-offset-background-dark transition-all">
+                        <span id="profile-initial">N</span>
+                    </a>
+                </div>
+            </header>
+            <div class="flex-1 p-8 overflow-hidden">
+                <div
+                    class="bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800 w-full h-full flex flex-col justify-center items-center">
+                    <div class="p-8 w-full max-w-md">
+                        <div class="flex flex-col items-center justify-center mb-8">
+                            <span class="material-symbols-outlined text-slate-400 text-5xl mb-4">lock</span>
+                            <h1 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Change Password</h1>
+                            <p class="text-slate-500 dark:text-slate-400 text-center">Update your account password.
+                                Ensure it is at
+                                least 6 characters long.</p>
+                        </div>
+
+                        <form id="change-password-form" class="space-y-6">
+                            <div>
+                                <label for="current-password"
+                                    class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Current
+                                    Password</label>
+                                <input type="password" id="current-password" name="current-password"
+                                    placeholder="Enter current password" required
+                                    class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary dark:bg-slate-800 dark:text-white placeholder-slate-400" />
+                            </div>
+
+                            <div>
+                                <label for="new-password"
+                                    class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">New
+                                    Password</label>
+                                <input type="password" id="new-password" name="new-password"
+                                    placeholder="Enter new password (min 6 characters)" required minlength="6"
+                                    class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary dark:bg-slate-800 dark:text-white placeholder-slate-400" />
+                            </div>
+
+                            <div>
+                                <label for="confirm-password"
+                                    class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Confirm
+                                    New Password</label>
+                                <input type="password" id="confirm-password" name="confirm-password"
+                                    placeholder="Confirm new password" required
+                                    class="w-full px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-md focus:ring-primary focus:border-primary dark:bg-slate-800 dark:text-white placeholder-slate-400" />
+                            </div>
+
+                            <div id="message-container" class="hidden p-3 rounded text-sm text-center"></div>
+
+                            <div class="pt-4">
+                                <button type="submit" id="submit-btn"
+                                    class="w-full flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium text-white rounded bg-primary hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <span class="material-symbols-outlined text-lg">check_circle</span>
+                                    Change Password
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = '/api/v1';
+
+        // Auth Check
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login';
+            }
+            return token;
+        }
+
+        // Fetch Helper
+        async function fetchWithAuth(endpoint, options = {}) {
+            const token = checkAuth();
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, { ...options, headers });
+                if (response.status === 401) {
+                    localStorage.removeItem('token');
+                    window.location.href = '/login';
+                    return null;
+                }
+                return response;
+            } catch (error) {
+                console.error('Network Error:', error);
+                return null;
+            }
+        }
+
+        // Load User Profile Initial
+        async function loadUserProfile() {
+            const response = await fetchWithAuth('/auth/me');
+            if (response && response.ok) {
+                const user = await response.json();
+                const nameToDisplay = user.full_name || user.email || '-';
+                document.getElementById('profile-initial').textContent = nameToDisplay.charAt(0).toUpperCase();
+            }
+            document.getElementById('page-loader').style.display = 'none';
+        }
+
+        // Handle Form Submission
+        document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const messageContainer = document.getElementById('message-container');
+            const submitBtn = document.getElementById('submit-btn');
+
+            // Reset message
+            messageContainer.classList.add('hidden');
+            messageContainer.className = 'hidden p-3 rounded text-sm text-center';
+
+            // Validation
+            if (newPassword !== confirmPassword) {
+                messageContainer.textContent = "New passwords do not match.";
+                messageContainer.classList.remove('hidden');
+                messageContainer.classList.add('bg-red-100', 'text-red-700');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                messageContainer.textContent = "Password must be at least 6 characters long.";
+                messageContainer.classList.remove('hidden');
+                messageContainer.classList.add('bg-red-100', 'text-red-700');
+                return;
+            }
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Processing...';
+
+            try {
+                // Construct URL with query parameters as per backend signature
+                const params = new URLSearchParams({
+                    current_password: currentPassword,
+                    new_password: newPassword
+                });
+
+                const response = await fetchWithAuth(`/auth/change_password?${params.toString()}`, {
+                    method: 'POST'
+                });
+
+                if (response) {
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        messageContainer.textContent = "Password changed successfully!";
+                        messageContainer.classList.remove('hidden');
+                        messageContainer.classList.add('bg-green-100', 'text-green-700');
+                        document.getElementById('change-password-form').reset();
+                    } else {
+                        messageContainer.textContent = data.detail || "Failed to change password.";
+                        messageContainer.classList.remove('hidden');
+                        messageContainer.classList.add('bg-red-100', 'text-red-700');
+                    }
+                } else {
+                    messageContainer.textContent = "Network error occurred. Please try again.";
+                    messageContainer.classList.remove('hidden');
+                    messageContainer.classList.add('bg-red-100', 'text-red-700');
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                messageContainer.textContent = "An unexpected error occurred.";
+                messageContainer.classList.remove('hidden');
+                messageContainer.classList.add('bg-red-100', 'text-red-700');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span> Change Password';
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadUserProfile();
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                window.location.href = '/login';
+            });
+        });
+    </script>
+</body>
+
+</html>

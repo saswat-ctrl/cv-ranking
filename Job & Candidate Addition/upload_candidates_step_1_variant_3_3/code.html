@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Upload Candidates Step 1 Compacted</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19c29d",
+                        "primary-dark": "#14a081",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#11211d",
+                        "soft-mint": "#E9FBEF",
+                        "soft-mint-dark": "rgba(25, 194, 157, 0.1)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }.custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #d1d5db;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4 sm:p-8">
+<div class="w-full max-w-[640px] bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col h-[750px]">
+<div class="px-8 pt-8 pb-4 flex flex-col gap-2 shrink-0">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">
+                Step 1 of 3
+            </p>
+<h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">
+                Upload New Candidates
+            </h2>
+<p class="text-gray-600 dark:text-gray-300 text-base font-normal leading-relaxed mt-1 max-w-xl">
+                Add CVs for this job by uploading PDF or Word documents. You can skip this step if you want to import candidates later.
+            </p>
+</div>
+<div class="px-8 py-2 flex flex-col gap-6 flex-1 min-h-0">
+<div class="relative group cursor-pointer shrink-0">
+<div class="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-[#dce5e3] dark:border-gray-600 bg-soft-mint dark:bg-soft-mint-dark hover:bg-[#dff5ea] dark:hover:bg-green-900/20 transition-colors px-6 py-6">
+<div class="w-14 h-14 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary mb-1">
+<span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+</div>
+<div class="flex flex-col items-center gap-0.5 text-center">
+<p class="text-gray-900 dark:text-white text-lg font-bold leading-tight">
+                            Drag &amp; drop CVs here
+                        </p>
+<p class="text-gray-500 dark:text-gray-400 text-xs font-normal">
+                            or select files from your computer
+                        </p>
+</div>
+<button class="flex items-center justify-center gap-2 h-10 px-5 bg-primary hover:bg-primary-dark text-white text-xs font-bold tracking-wide rounded-lg transition-colors shadow-sm mt-2">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+                        Browse Files
+                    </button>
+<p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">Supported formats: PDF, DOC, DOCX</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 min-h-0 flex-1">
+<div class="flex items-center justify-between shrink-0">
+<h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Attached Files <span class="text-gray-400 font-normal normal-case ml-1">(6)</span></h3>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-2 -mr-2 pb-2 h-[220px]">
+<div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+<div class="flex items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/20 shrink-0 w-12 h-12 text-red-500 dark:text-red-400">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-gray-900 dark:text-white text-sm font-medium truncate">resume_john_doe_senior_dev.pdf</p>
+<p class="text-gray-400 dark:text-gray-400 text-xs">2.4 MB • Uploaded just now</p>
+</div>
+<div class="shrink-0 pr-2">
+<button class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors flex items-center gap-1">
+                                Remove
+                            </button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+<div class="flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/20 shrink-0 w-12 h-12 text-blue-500 dark:text-blue-400">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-gray-900 dark:text-white text-sm font-medium truncate">candidate_profile_sarah.docx</p>
+<p class="text-gray-400 dark:text-gray-400 text-xs">1.8 MB • Uploaded 1 min ago</p>
+</div>
+<div class="shrink-0 pr-2">
+<button class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors flex items-center gap-1">
+                                Remove
+                            </button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+<div class="flex items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/20 shrink-0 w-12 h-12 text-red-500 dark:text-red-400">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-gray-900 dark:text-white text-sm font-medium truncate">another_resume_michael_b.pdf</p>
+<p class="text-gray-400 dark:text-gray-400 text-xs">3.1 MB • Uploaded 2 mins ago</p>
+</div>
+<div class="shrink-0 pr-2">
+<button class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors flex items-center gap-1">
+                                Remove
+                            </button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+<div class="flex items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/20 shrink-0 w-12 h-12 text-red-500 dark:text-red-400">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-gray-900 dark:text-white text-sm font-medium truncate">frontend_engineer_cv.pdf</p>
+<p class="text-gray-400 dark:text-gray-400 text-xs">1.2 MB • Uploaded 5 mins ago</p>
+</div>
+<div class="shrink-0 pr-2">
+<button class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors flex items-center gap-1">
+                                Remove
+                            </button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+<div class="flex items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-900/20 shrink-0 w-12 h-12 text-blue-500 dark:text-blue-400">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-gray-900 dark:text-white text-sm font-medium truncate">marketing_manager_application.docx</p>
+<p class="text-gray-400 dark:text-gray-400 text-xs">4.5 MB • Uploaded 10 mins ago</p>
+</div>
+<div class="shrink-0 pr-2">
+<button class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors flex items-center gap-1">
+                                Remove
+                            </button>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+<div class="flex items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/20 shrink-0 w-12 h-12 text-red-500 dark:text-red-400">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-gray-900 dark:text-white text-sm font-medium truncate">project_lead_references.pdf</p>
+<p class="text-gray-400 dark:text-gray-400 text-xs">0.9 MB • Uploaded 12 mins ago</p>
+</div>
+<div class="shrink-0 pr-2">
+<button class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors flex items-center gap-1">
+                                Remove
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">
+<button class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+                Skip &amp; Continue
+            </button>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold px-6 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px]">
+                Next: Import From Jobs
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

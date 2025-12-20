@@ -20,7 +20,8 @@ export default function RootLayout({
   const pathname = usePathname();
 
   // Pages that should NOT have sidebar/topbar
-  const publicPages = ['/', '/login', '/signup', '/set-password'];
+  // We treat dashboard, jobs, settings, profile as "public" here so they don't render the Next.js layout before redirecting
+  const publicPages = ['/', '/login', '/signup', '/set-password', '/dashboard', '/jobs', '/settings', '/profile'];
   const isPublicPage = publicPages.includes(pathname);
 
   return (

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Import From Existing Jobs</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19c29d",
+                        "primary-dark": "#14a081",
+                        "primary-light": "#e0f8f2",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#11211d",
+                        "soft-mint": "#E9FBEF",
+                        "soft-mint-dark": "rgba(25, 194, 157, 0.1)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+<div class="w-full max-w-[900px] bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col min-h-[600px] relative z-10">
+<div class="px-8 pt-8 pb-2 flex flex-col gap-2 shrink-0">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">
+                Step 2 of 3
+            </p>
+<h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">
+                Import From Existing Jobs
+            </h2>
+<p class="text-gray-800 dark:text-gray-300 text-base font-normal leading-relaxed mt-1 max-w-2xl">
+                Select a job to import candidates from. You can select multiple candidates across multiple jobs.
+            </p>
+</div>
+<div class="px-8 py-6 flex flex-col gap-8 flex-1">
+<div class="flex flex-col gap-3">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-200">Select a Source Job</label>
+<div class="relative group w-full max-w-xl">
+<button class="w-full flex items-center justify-between bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-left shadow-sm hover:border-primary hover:shadow-md hover:bg-soft-mint transition-all duration-200 group-focus:border-primary group-focus:ring-1 group-focus:ring-primary">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div class="flex flex-col">
+<span class="text-gray-900 dark:text-white font-semibold text-sm">Select a job...</span>
+<span class="text-gray-500 dark:text-gray-400 text-xs">Browse open positions</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">expand_more</span>
+</button>
+<div class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl shadow-xl p-1 hidden group-focus-within:block z-20">
+<div class="px-3 py-2 text-xs font-medium text-gray-400 uppercase tracking-wider">Recent Jobs</div>
+<div class="flex items-center gap-3 p-3 hover:bg-soft-mint cursor-pointer rounded-lg transition-colors">
+<div class="flex flex-col">
+<span class="text-gray-900 dark:text-white font-medium text-sm">Senior Frontend Engineer</span>
+<span class="text-gray-500 text-xs">42 Candidates Available</span>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 hover:bg-soft-mint cursor-pointer rounded-lg transition-colors">
+<div class="flex flex-col">
+<span class="text-gray-900 dark:text-white font-medium text-sm">Product Designer</span>
+<span class="text-gray-500 text-xs">18 Candidates Available</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 border-t border-dashed border-gray-200 dark:border-gray-700 pt-6">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                        Candidates Ready for Import
+                    </h3>
+<span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold px-2 py-1 rounded-full">3 Selected</span>
+</div>
+<div class="bg-background-light dark:bg-gray-900/50 rounded-xl p-4 border border-gray-100 dark:border-gray-700 flex flex-col gap-3">
+<div class="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">JD</div>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white">John Doe</p>
+<p class="text-xs text-gray-500">From: UX Designer 2023</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors p-1 hover:bg-red-50 rounded-full">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<div class="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">SM</div>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white">Sarah Miller</p>
+<p class="text-xs text-gray-500">From: Product Manager</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors p-1 hover:bg-red-50 rounded-full">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<div class="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold">RK</div>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white">Robert King</p>
+<p class="text-xs text-gray-500">From: Product Manager</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors p-1 hover:bg-red-50 rounded-full">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0 z-10">
+<button class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+                Back
+            </button>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold px-6 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px]">
+                Next: Review &amp; Confirm
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+
+</body></html>

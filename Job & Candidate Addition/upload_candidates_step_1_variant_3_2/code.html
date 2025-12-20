@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Review &amp; Confirm Step 3 Variant 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19c29d",
+                        "primary-dark": "#14a081",
+                        "primary-light": "#e0f8f2",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#11211d",
+                        "soft-mint": "#E9FBEF",
+                        "soft-mint-dark": "rgba(25, 194, 157, 0.1)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 20px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #d1d5db;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+<div class="w-full max-w-[900px] bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col h-[85vh] relative z-10">
+<div class="px-8 pt-8 pb-4 flex flex-col gap-2 shrink-0 border-b border-transparent">
+<div class="flex items-center justify-between">
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">
+                    Step 3 of 3
+                </p>
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+</div>
+</div>
+<h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">
+                Review &amp; Confirm
+            </h2>
+<p class="text-gray-600 dark:text-gray-300 text-base font-normal leading-relaxed mt-1 max-w-2xl">
+                Please review your uploaded files and imported candidates. Ensure everything is correct before finalizing the shortlist.
+            </p>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar px-8 pb-8 pt-2">
+<div class="mb-8">
+<div class="sticky top-0 bg-white dark:bg-gray-800 z-10 py-3 mb-2 border-b border-gray-50 dark:border-gray-700/50">
+<h3 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider flex items-center gap-2">
+                        Uploaded Files
+                        <span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full font-semibold">3</span>
+</h3>
+</div>
+<div class="space-y-3">
+<div class="group flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all bg-white dark:bg-gray-800">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">resume_senior_dev_alex.pdf</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">2.4 MB • Uploaded just now</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
+<span class="text-sm font-medium hidden group-hover:inline mr-1">Remove</span>
+<span class="material-symbols-outlined text-[20px] align-middle">delete</span>
+</button>
+</div>
+<div class="group flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all bg-white dark:bg-gray-800">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 flex items-center justify-center">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">cover_letter_alex_m.pdf</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">1.1 MB • Uploaded just now</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
+<span class="text-sm font-medium hidden group-hover:inline mr-1">Remove</span>
+<span class="material-symbols-outlined text-[20px] align-middle">delete</span>
+</button>
+</div>
+<div class="group flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/40 hover:shadow-md hover:shadow-primary/5 transition-all bg-white dark:bg-gray-800">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">new_candidate_cv.pdf</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">2.0 MB • Uploaded just now</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-500 transition-colors p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
+<span class="text-sm font-medium hidden group-hover:inline mr-1">Remove</span>
+<span class="material-symbols-outlined text-[20px] align-middle">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="relative py-4">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+</div>
+</div>
+<div class="mb-4">
+<div class="sticky top-0 bg-white dark:bg-gray-800 z-10 py-3 mb-2 border-b border-gray-50 dark:border-gray-700/50">
+<h3 class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider flex items-center gap-2">
+                        Imported Candidates
+                        <span class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full font-semibold">4</span>
+</h3>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary/40 hover:bg-soft-mint/30 dark:hover:bg-primary/5 transition-all group bg-white dark:bg-gray-800">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-300 flex items-center justify-center text-sm font-bold shadow-sm">
+                                AF
+                            </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm font-bold text-gray-900 dark:text-white truncate">Alice Freeman</span>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400 truncate">alice.freeman@example.com</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 mr-4">
+<span class="px-2 py-1 rounded-md bg-soft-mint dark:bg-primary/10 text-primary-dark dark:text-primary text-[10px] font-semibold border border-primary/20">React</span>
+<span class="px-2 py-1 rounded-md bg-soft-mint dark:bg-primary/10 text-primary-dark dark:text-primary text-[10px] font-semibold border border-primary/20">TypeScript</span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary/40 hover:bg-soft-mint/30 dark:hover:bg-primary/5 transition-all group bg-white dark:bg-gray-800">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-300 flex items-center justify-center text-sm font-bold shadow-sm">
+                                DC
+                            </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm font-bold text-gray-900 dark:text-white truncate">David Chen</span>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400 truncate">david.chen88@gmail.com</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 mr-4">
+<span class="px-2 py-1 rounded-md bg-soft-mint dark:bg-primary/10 text-primary-dark dark:text-primary text-[10px] font-semibold border border-primary/20">Vue.js</span>
+<span class="px-2 py-1 rounded-md bg-soft-mint dark:bg-primary/10 text-primary-dark dark:text-primary text-[10px] font-semibold border border-primary/20">Node.js</span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary/40 hover:bg-soft-mint/30 dark:hover:bg-primary/5 transition-all group bg-white dark:bg-gray-800">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-300 flex items-center justify-center text-sm font-bold shadow-sm">
+                                ER
+                            </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="text-sm font-bold text-gray-900 dark:text-white truncate">Eleanor Rigby</span>
+</div>
+<span class="text-xs text-gray-500 dark:text-gray-400 truncate">eleanor.r@design.co</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 mr-4">
+<span class="px-2 py-1 rounded-md bg-soft-mint dark:bg-primary/10 text-primary-dark dark:text-primary text-[10px] font-semibold border border-primary/20">Figma</span>
+<span class="px-2 py-1 rounded-md bg-soft-mint dark:bg-primary/10 text-primary-dark dark:text-primary text-[10px] font-semibold border border-primary/20">UX/UI</span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 opacity-60 grayscale-[0.8] cursor-not-allowed">
+<div class="flex items-center gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400 flex items-center justify-center text-sm font-bold">
+                                MJ
+                            </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-gray-600 dark:text-gray-400 truncate">Marcus Johnson</span>
+<span class="text-[10px] border border-gray-300 text-gray-500 px-1.5 rounded bg-white dark:bg-gray-800 dark:border-gray-600">Pending</span>
+</div>
+<span class="text-xs text-gray-400 dark:text-gray-500 truncate">marcus.j@tech.io</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 mr-4 opacity-50">
+<span class="px-2 py-1 rounded-md bg-gray-100 text-gray-500 text-[10px] font-semibold border border-gray-200">Angular</span>
+</div>
+<div class="relative group/tooltip">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[20px]">block</span>
+</button>
+<div class="absolute bottom-full right-0 mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover/tooltip:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                                Cannot remove pending import
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0 z-10">
+<button class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors flex items-center gap-2 group">
+<span class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                Back
+            </button>
+<div class="flex items-center gap-4">
+<span class="text-sm text-gray-500 font-medium">7 items selected</span>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold px-8 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px] hover:shadow-primary/30">
+                    Confirm &amp; Submit
+                    <span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

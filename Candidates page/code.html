@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Candidates List Infinite Scroll</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    primary: "#19C29D",
+                    "primary-dark": "#13997C",
+                    "background-light": "#F9FAFB",
+                    "background-dark": "#111827",
+                    "surface-light": "#FFFFFF",
+                    "surface-dark": "#1F2937",
+                    "border-light": "#E5E7EB",
+                    "border-dark": "#374151",
+                    "text-main-light": "#1F2937",
+                    "text-main-dark": "#F9FAFB",
+                    "text-muted-light": "#6B7280",
+                    "text-muted-dark": "#9CA3AF",
+                    "soft-mint": "#E9FBEF",
+                    "soft-mint-dark": "#064E3B",
+                },
+                fontFamily: {
+                    display: ["Inter", "sans-serif"],
+                    body: ["Inter", "sans-serif"],
+                },
+                borderRadius: {
+                    DEFAULT: "0.5rem",
+                },
+            },
+        },
+    };
+</script>
+<style>::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .dark ::-webkit-scrollbar-thumb { background: #4b5563; }
+    .dark ::-webkit-scrollbar-thumb:hover { background: #6b7280; }.toggle-checkbox:checked {
+        right: 0;
+        border-color: #19C29D;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+        background-color: #19C29D;
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-body antialiased h-screen flex overflow-hidden">
+<aside class="w-20 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark flex flex-col items-center py-6 flex-shrink-0 z-20">
+<div class="mb-10">
+<div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+<svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L2 7L12 12L22 7L12 2Z"></path>
+<path d="M2 17L12 22L22 17" opacity="0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M2 12L12 17L22 12" opacity="0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-6 w-full items-center">
+<a class="p-3 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined text-2xl">dashboard</span>
+</a>
+<a class="p-3 bg-soft-mint dark:bg-soft-mint-dark text-primary rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined text-2xl">work_outline</span>
+</a>
+<a class="p-3 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined text-2xl">settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="p-3 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors" href="#">
+<span class="material-icons-outlined text-2xl">logout</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<header class="bg-surface-light dark:bg-surface-dark border-b border-border-light dark:border-border-dark h-20 px-8 flex items-center justify-between flex-shrink-0 z-10">
+<div>
+<h1 class="text-xl font-bold text-text-main-light dark:text-text-main-dark">Jobs</h1>
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark">Manage your job postings and rankings</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors relative">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white dark:border-gray-800"></span>
+</button>
+<div class="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center text-text-muted-light dark:text-text-muted-dark font-medium">
+                T
+            </div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-7xl mx-auto space-y-6">
+<div>
+<h2 class="text-3xl font-bold text-text-main-light dark:text-text-main-dark mb-2">Candidates</h2>
+<p class="text-text-muted-light dark:text-text-muted-dark max-w-4xl">
+                    Review, rank, and export candidates for this job. Use the sorting toggle to quickly identify top talent.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<p class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wider mb-1">Total Candidates</p>
+<p class="text-2xl font-bold text-text-main-light dark:text-text-main-dark">102</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<p class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wider mb-1">Ranked by AI</p>
+<p class="text-2xl font-bold text-text-main-light dark:text-text-main-dark">85</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<p class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wider mb-1">Unranked</p>
+<p class="text-2xl font-bold text-text-main-light dark:text-text-main-dark">12</p>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-sm">
+<p class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark uppercase tracking-wider mb-1">Selected</p>
+<p class="text-2xl font-bold text-primary">5</p>
+</div>
+</div>
+<div class="flex flex-row items-center justify-between gap-4 bg-surface-light dark:bg-surface-dark p-4 rounded-xl border border-border-light dark:border-border-dark shadow-sm overflow-x-auto">
+<div class="flex items-center gap-2 flex-nowrap shrink-0">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-border-light dark:border-border-dark rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm text-text-main-light dark:text-text-main-dark whitespace-nowrap">
+<span class="material-icons-outlined text-base">upload_file</span>
+                        Add Candidates
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-border-light dark:border-border-dark rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm text-text-main-light dark:text-text-main-dark whitespace-nowrap">
+<span class="material-icons-outlined text-base">download</span>
+                        Export CSV
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-border-light dark:border-border-dark rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm text-text-main-light dark:text-text-main-dark whitespace-nowrap">
+<span class="material-icons-outlined text-base">trending_up</span>
+                        Rank All
+                    </button>
+<div class="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-1 hidden sm:block"></div>
+<button class="flex items-center gap-2 px-4 py-2 bg-soft-mint dark:bg-soft-mint-dark text-primary border border-transparent rounded-lg text-sm font-medium hover:bg-green-100 dark:hover:bg-green-900 transition-colors shadow-sm animate-fade-in whitespace-nowrap">
+<span class="material-icons-outlined text-base">check_circle</span>
+                        Qualify
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-transparent rounded-lg text-sm font-medium hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors shadow-sm animate-fade-in whitespace-nowrap">
+<span class="material-icons-outlined text-base">delete</span>
+                        Delete
+                    </button>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<div class="relative w-64">
+<span class="material-icons-outlined absolute left-3 top-2.5 text-text-muted-light dark:text-text-muted-dark text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background-light dark:bg-gray-900 border border-border-light dark:border-border-dark rounded-lg text-sm focus:ring-primary focus:border-primary dark:text-text-main-dark transition-colors" placeholder="Search..." type="text"/>
+</div>
+<select class="px-3 py-2 bg-background-light dark:bg-gray-900 border border-border-light dark:border-border-dark rounded-lg text-sm focus:ring-primary focus:border-primary dark:text-text-main-dark">
+<option>All Candidates</option>
+<option>Ranked</option>
+<option>Unranked</option>
+</select>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark shadow-sm overflow-hidden flex flex-col">
+<div class="px-4 py-3 border-b border-border-light dark:border-border-dark flex items-center bg-gray-50/50 dark:bg-gray-800/20">
+<label class="flex items-center cursor-pointer gap-3">
+<span class="text-sm font-medium text-text-muted-light dark:text-text-muted-dark">Sort by Score</span>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer border-gray-300 dark:border-gray-600 focus:ring-0 checked:border-primary" id="toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-600 cursor-pointer" for="toggle"></label>
+</div>
+</label>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/50 border-b border-border-light dark:border-border-dark text-xs uppercase text-text-muted-light dark:text-text-muted-dark font-semibold">
+<th class="p-4 w-12 text-center">
+<input class="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-600 dark:bg-gray-700 w-4 h-4" type="checkbox"/>
+</th>
+<th class="p-4 w-1/4">Candidate Details</th>
+<th class="p-4 w-1/3">Skills</th>
+<th class="p-4 w-48">Score</th>
+<th class="p-4">My Score</th>
+<th class="p-4 w-24 text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark text-sm">
+<tr class="bg-soft-mint/30 dark:bg-soft-mint-dark/10 transition-colors group">
+<td class="p-4 text-center">
+<input checked="" class="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-600 dark:bg-gray-700 w-4 h-4" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main-light dark:text-text-main-dark text-base mb-1">Saswat Ray Product</span>
+<a class="flex items-center text-text-muted-light dark:text-text-muted-dark hover:text-primary dark:hover:text-primary transition-colors text-xs" href="mailto:saswat.ambitionbox@gmail.com">
+<span class="material-icons-outlined text-sm mr-1">email</span>
+                                            saswat.ambitionbox@gmail.com
+                                        </a>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1.5 max-h-16 overflow-hidden relative">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">backlog</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">bolt</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">firebase</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">ga4</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">+11 more</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1.5 w-full max-w-[140px]">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-text-main-light dark:text-text-main-dark">85%</span>
+<span class="text-xs text-primary dark:text-primary font-medium">High Match</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<input class="w-20 px-2 py-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-primary focus:border-primary text-center" placeholder="-" type="number" value="90"/>
+<button class="text-primary hover:text-primary-dark transition-colors" title="Saved">
+<span class="material-icons-outlined text-lg">check</span>
+</button>
+</div>
+</td>
+<td class="p-4 text-center">
+<button class="p-2 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors" title="View Details">
+<span class="material-icons-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-600 dark:bg-gray-700 w-4 h-4" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main-light dark:text-text-main-dark text-base mb-1">Emily Chen</span>
+<a class="flex items-center text-text-muted-light dark:text-text-muted-dark hover:text-primary dark:hover:text-primary transition-colors text-xs" href="mailto:emily.chen.ux@gmail.com">
+<span class="material-icons-outlined text-sm mr-1">email</span>
+                                            emily.chen.ux@gmail.com
+                                        </a>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1.5 max-h-16 overflow-hidden relative">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">figma</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">sketch</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">prototyping</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">+8 more</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1.5 w-full max-w-[140px]">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-text-main-light dark:text-text-main-dark">92%</span>
+<span class="text-xs text-primary dark:text-primary font-medium">Top Match</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<input class="w-20 px-2 py-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-primary focus:border-primary text-center" placeholder="-" type="number"/>
+<button class="text-gray-400 hover:text-primary transition-colors" title="Save Score">
+<span class="material-icons-outlined text-lg">save_alt</span>
+</button>
+</div>
+</td>
+<td class="p-4 text-center">
+<button class="p-2 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors" title="View Details">
+<span class="material-icons-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-600 dark:bg-gray-700 w-4 h-4" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main-light dark:text-text-main-dark text-base mb-1">Michael Ross</span>
+<a class="flex items-center text-text-muted-light dark:text-text-muted-dark hover:text-primary dark:hover:text-primary transition-colors text-xs" href="mailto:mross.dev@outlook.com">
+<span class="material-icons-outlined text-sm mr-1">email</span>
+                                            mross.dev@outlook.com
+                                        </a>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1.5 max-h-16 overflow-hidden relative">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">react</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">nodejs</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">aws</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1.5 w-full max-w-[140px]">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-text-main-light dark:text-text-main-dark">78%</span>
+<span class="text-xs text-blue-500 font-medium">Good Match</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-blue-500 h-2 rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<input class="w-20 px-2 py-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-primary focus:border-primary text-center" placeholder="-" type="number"/>
+<button class="text-gray-400 hover:text-primary transition-colors" title="Save Score">
+<span class="material-icons-outlined text-lg">save_alt</span>
+</button>
+</div>
+</td>
+<td class="p-4 text-center">
+<button class="p-2 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors" title="View Details">
+<span class="material-icons-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-600 dark:bg-gray-700 w-4 h-4" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main-light dark:text-text-main-dark text-base mb-1">Sarah Miller</span>
+<a class="flex items-center text-text-muted-light dark:text-text-muted-dark hover:text-primary dark:hover:text-primary transition-colors text-xs" href="mailto:sarah.m.design@gmail.com">
+<span class="material-icons-outlined text-sm mr-1">email</span>
+                                            sarah.m.design@gmail.com
+                                        </a>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1.5 max-h-16 overflow-hidden relative">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">photoshop</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">illustrator</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">indesign</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1.5 w-full max-w-[140px]">
+<div class="flex justify-between items-end">
+<span class="text-sm font-bold text-text-main-light dark:text-text-main-dark">65%</span>
+<span class="text-xs text-orange-500 font-medium">Medium</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+<div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<input class="w-20 px-2 py-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-primary focus:border-primary text-center" placeholder="-" type="number"/>
+<button class="text-gray-400 hover:text-primary transition-colors" title="Save Score">
+<span class="material-icons-outlined text-lg">save_alt</span>
+</button>
+</div>
+</td>
+<td class="p-4 text-center">
+<button class="p-2 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors" title="View Details">
+<span class="material-icons-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded text-primary focus:ring-primary border-gray-300 dark:border-gray-600 dark:bg-gray-700 w-4 h-4" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-bold text-text-main-light dark:text-text-main-dark text-base mb-1">Unknown Candidate</span>
+<a class="flex items-center text-text-muted-light dark:text-text-muted-dark hover:text-primary dark:hover:text-primary transition-colors text-xs" href="mailto:anishsinha.work@gmail.com">
+<span class="material-icons-outlined text-sm mr-1">email</span>
+                                            anishsinha.work@gmail.com
+                                        </a>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-1.5 max-h-16 overflow-hidden relative">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">agile</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">analytics</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">excel</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">figma</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">+11 more</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col gap-1.5 w-full max-w-[140px]">
+<div class="flex justify-between items-end">
+<span class="text-xs font-medium text-text-muted-light dark:text-text-muted-dark italic">Not ranked yet</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 border border-gray-200 dark:border-gray-700">
+<div class="bg-gray-300 dark:bg-gray-600 h-2 rounded-full" style="width: 0%"></div>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<input class="w-20 px-2 py-1 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded text-sm focus:ring-primary focus:border-primary text-center" placeholder="-" type="number"/>
+<button class="text-gray-400 hover:text-primary transition-colors" title="Save Score">
+<span class="material-icons-outlined text-lg">save_alt</span>
+</button>
+</div>
+</td>
+<td class="p-4 text-center">
+<button class="p-2 text-text-muted-light dark:text-text-muted-dark hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors" title="View Details">
+<span class="material-icons-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark px-4 py-6 border-t border-border-light dark:border-border-dark flex flex-col items-center justify-center gap-3">
+<p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    Showing <span class="font-bold text-text-main-light dark:text-text-main-dark">100</span> results
+                </p>
+<div class="flex items-center gap-2 text-primary opacity-0 hover:opacity-100 transition-opacity duration-500 cursor-wait">
+<span class="material-icons-outlined animate-spin text-xl">sync</span>
+<span class="text-sm font-medium">Loading more candidates...</span>
+</div>
+</div>
+</div>
+</div>
+</div></main>
+</body></html>
