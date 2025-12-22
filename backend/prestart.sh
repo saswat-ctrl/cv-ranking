@@ -5,11 +5,11 @@ set -e
 echo "Running database migrations..."
 alembic upgrade head
 
-# Start Gunicorn
-echo "Starting production server..."
-# Use the command passed from Docker CMD or default to gunicorn if no arguments
+# Start Uvicorn
+echo "Starting production server (Uvicorn)..."
+# Use the command passed from Docker CMD or default to uvicorn
 if [ "$#" -eq 0 ]; then
-    exec gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+    exec uvicorn app.main:app --host 0.0.0.0 --port 8000
 else
     exec "$@"
 fi

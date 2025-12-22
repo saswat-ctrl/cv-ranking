@@ -51,7 +51,7 @@ services:
     restart: always
     # For production, we recommend using Gunicorn.
     # You can override the command here or update Dockerfile.backend
-    command: gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+    command: /app/prestart.sh
 
   # Frontend App
   frontend:
