@@ -56,6 +56,8 @@ RUN pip install --no-cache /wheels/*
 COPY backend/app ./app
 COPY backend/alembic.ini .
 COPY backend/alembic ./alembic
+COPY backend/prestart.sh .
+RUN chmod +x prestart.sh
 
 # Create directory for uploads
 RUN mkdir -p /app/uploads
