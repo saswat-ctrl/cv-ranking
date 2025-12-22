@@ -27,6 +27,10 @@ COPY backend/pyproject.toml backend/poetry.lock* ./
 # Export requirements.txt
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
+# OPTIMIZATION: Remove default torch (CUDA) and install CPU-only version
+RUN sed -i '/torch/d' requirements.txt
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels "torch>=2.0.0" --index-url https://download.pytorch.org/whl/cpu
+
 # Install python dependencies from requirements.txt
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
 
