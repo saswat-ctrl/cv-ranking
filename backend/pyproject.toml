@@ -23,8 +23,7 @@ python-multipart = "^0.0.6"
 # Phase 1: Open-source OCR & Text Extraction
 pymupdf = "^1.23.0"
 python-docx = "^1.1.0"
-paddlepaddle = "^2.6.0"
-paddleocr = "^2.7.0"
+
 pytesseract = "^0.3.10"
 pillow = "^10.0.0"
 
