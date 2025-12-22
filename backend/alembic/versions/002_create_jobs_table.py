@@ -23,7 +23,7 @@ def upgrade() -> None:
     sa.Column('jd_file_url', sa.String(), nullable=False),
     sa.Column('jd_text_content', sa.Text(), nullable=True),
     sa.Column('job_title', sa.String(), nullable=True),
-    sa.Column('status', sa.Enum('UPLOADED', 'PROCESSING', 'READY', 'FAILED', name='jobstatus'), nullable=True),
+    sa.Column('status', sa.Enum('OPEN', 'CLOSED', 'ARCHIVED', 'UPLOADED', 'PROCESSING', 'READY', 'FAILED', name='jobstatus'), nullable=True),
     sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
