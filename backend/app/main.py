@@ -132,7 +132,7 @@ from sqlalchemy import text
 from fastapi import Depends, status, HTTPException
 from app.api import deps
 
-@app.get("/health")
+@app.get(f"{settings.API_V1_STR}/health")
 async def health_check(db: AsyncSession = Depends(deps.get_db)):
     try:
         # Check database connectivity
