@@ -1097,7 +1097,7 @@
                 // Close modal and redirect to dashboard
                 closeModals();
                 // alert('Successfully signed in!');
-                window.location.href = 'http://localhost:4000/dashboard';
+                window.location.href = '/dashboard';
 
             } catch (err) {
                 errorEl.textContent = err.message;
@@ -1158,7 +1158,7 @@
                 if (loginResponse.ok && loginData.access_token) {
                     localStorage.setItem('token', loginData.access_token);
                     document.cookie = `token=${loginData.access_token}; path=/; max-age=604800; SameSite=Lax`;
-                    window.location.href = 'http://localhost:4000/dashboard';
+                    window.location.href = '/dashboard';
                 } else {
                     alert('Account created! Please sign in.');
                     openSignIn();
