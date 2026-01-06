@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  # Database Service
+  db:
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - saarnews-prod
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.backend
+    restart: always
+    environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SECRET_KEY=${SECRET_KEY}
+      - BACKEND_CORS_ORIGINS=${BACKEND_CORS_ORIGINS}
+      - ENVIRONMENT=production
+      - HF_HOME=/app/.cache/huggingface
+    volumes:
+      - uploads_data:/app/uploads
+      - huggingface_cache:/app/.cache/huggingface
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - saarnews-prod
+    # Use prestart.sh to run migrations before starting
+    command: /app/prestart.sh
+
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.frontend
+      args:
+        - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    restart: always
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    depends_on:
+      - backend
+    networks:
+      - saarnews-prod
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # We will need to copy the nginx conf to the server
+      - ./infra/nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      # Volume for SSL certs (Certbot)
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - saarnews-prod
+
+volumes:
+  postgres_data:
+  uploads_data:
+  huggingface_cache:
+
+
+networks:
+  saarnews-prod:
+    driver: bridge

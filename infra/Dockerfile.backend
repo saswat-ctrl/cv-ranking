@@ -48,10 +48,17 @@ COPY --from=builder /app/wheels /wheels
 COPY --from=builder /app/requirements.txt .
 RUN pip install --no-cache /wheels/*
 
+# Pre-download SBERT model to bake into image
+ENV HF_HOME=/app/.cache/huggingface
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')" && \
+    echo "✅ Model pre-downloaded and cached"
+
 # Copy application code
 COPY backend/app ./app
 COPY backend/alembic.ini .
 COPY backend/alembic ./alembic
+COPY backend/prestart.sh .
+RUN chmod +x prestart.sh
 
 # Create directory for uploads
 RUN mkdir -p /app/uploads

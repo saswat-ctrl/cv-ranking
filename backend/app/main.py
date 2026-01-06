@@ -34,25 +34,23 @@ def startup_checks():
     """
     Perform critical startup checks.
     1. Validate Python version (avoid 3.12 for ML workloads unless verified)
-    2. Check model loading (Fail Fast)
+    2. Preload SBERT model for embedding generation (Fail Fast)
     """
     # 1. Check Python Version
     if sys.version_info >= (3, 12):
         warmup_logger.warning("⚠️  Running on Python 3.12+. ML workloads may be unstable. Validated up to 3.11.")
     
-    # 2. Model Load Check
+    # 2. Preload SBERT Model
     try:
-        warmup_logger.info("Initializing ML models...")
-        # Avoid direct top-level import to prevent premature loading
-        import transformers as tr
+        warmup_logger.info(f"Preloading SBERT model for embedding generation...")
+        # Use the actual embedding service to preload the correct model
+        from app.services.embedding_service import preload_model
+        from app.core.config import settings
         
-        # Load critical model artifacts
-        tr.AutoTokenizer.from_pretrained("bert-base-uncased")
-        tr.AutoModel.from_pretrained("bert-base-uncased")
-        
-        warmup_logger.info("✅ ML core dependencies loaded successfully")
+        preload_model()
+        warmup_logger.info(f"✅ SBERT model '{settings.SBERT_MODEL}' loaded successfully")
     except Exception as e:
-        warmup_logger.critical(f"❌ CRITICAL FAILURE: Could not load ML models: {e}")
+        warmup_logger.critical(f"❌ CRITICAL FAILURE: Could not preload SBERT model: {e}")
         # Fail fast - do not allow app to start without ML core
         sys.exit(1)
 # --------------------

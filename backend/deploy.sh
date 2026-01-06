@@ -69,12 +69,18 @@ fi
 ############################################
 # DATABASE MIGRATIONS
 ############################################
-if command -v alembic >/dev/null 2>&1; then
-  echo "🗄️ Running database migrations..."
-  alembic upgrade head
 else
   echo "⚠️ Alembic not found. Skipping migrations."
 fi
+
+############################################
+# PRE-LOAD MODELS
+############################################
+echo "🧠 Pre-loading ML models..."
+$PYTHON -c "from app.services.embedding_service import preload_model; preload_model()" || {
+  echo "❌ ERROR: Model pre-loading failed."
+  exit 1
+}
 
 ############################################
 # START SERVICE

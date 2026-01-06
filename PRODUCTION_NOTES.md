@@ -39,3 +39,19 @@ Git must reflect Production behavior after stabilization.
 
 ### Key Takeaway
 This was a **verification finding**, not a production failure during user traffic. It occurred in the intended validation window.
+
+## Fix Verification — Jan 07 2026
+
+### Context
+- **Issue Recurred**: The "Could not find BertModel" error appeared again in production.
+- **Root Cause**: The Dec 28 fix (dependency pinning) masked the issue but didn't solve it. The code was explicitly checking for `bert-base-uncased` (wrong model) and downloading it at runtime.
+
+### Fix Implemented
+1. **Code**: Updated `main.py` startup check to use `embedding_service.preload_model()` which loads the correct `all-MiniLM-L6-v2`.
+2. **Infrastructure**:
+   - Updated `Dockerfile.backend` to pre-download the model during build (baking it into the image).
+   - Added `huggingface_cache` volume to `docker-compose.prod.yml` for persistence.
+
+### Verification status
+- **Local**: Verified `preload_model()` correctly loads `all-MiniLM-L6-v2`.
+- **Infrastructure**: Verified Dockerfile includes model pre-download step.
