@@ -2,10 +2,11 @@
 
 ## Emergency Hotfixes (Permanent)
 
-### auth.py / health.py
+### auth.py / health.py / __init__.py
 - Local code used `-> Any` return annotations without importing `Any`
 - This caused runtime NameError during module import
 - Production removed return type hints and/or added imports
+- `__init__.py` required explicit registration of `health` router
 - These changes are REQUIRED for runtime stability
 
 ⚠️ Do NOT reintroduce return type hints without validating imports.
