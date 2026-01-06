@@ -1329,6 +1329,11 @@
                 return;
             }
 
+            if (!currentJobId) {
+                showToast("Error", "Job ID is missing. Please reload the page.", "error");
+                return;
+            }
+
             showConfirmModal(`Generate AI Score for ${selectedChecks.length} candidates?`, async () => {
                 try {
                     showActionLoader(`Generating AI Score...`);
@@ -2772,13 +2777,8 @@
             // Icon
             if (iconEl && iconBgEl) {
                 iconEl.textContent = options.icon || 'warning';
-                // Reset classes first if needed, but simple class replacement for colors:
-                // Default Red
                 let iconColor = options.iconColorClass || 'text-red-600 dark:text-red-400';
                 let iconBg = options.iconBgClass || 'bg-red-100 dark:bg-red-900/30';
-
-                // Resetting base classes implies knowing them. For simplicity, we overwrite className if provided, or default.
-                // Better approach: explicit set.
                 iconEl.className = `material-symbols-outlined text-2xl ${iconColor}`;
                 iconBgEl.className = `w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${iconBg}`;
             }
@@ -2789,15 +2789,26 @@
                 const defaultBtnClass = "px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm";
                 const colorClass = options.confirmBtnClass || "bg-red-600 text-white hover:bg-red-700 shadow-red-200 dark:shadow-none";
                 btn.className = `${defaultBtnClass} ${colorClass}`;
+
+                // Clear previous handler to prevent duplicates
+                btn.onclick = null;
+
+                // Set new handler
+                btn.onclick = async () => {
+                    // Hide FIRST, to allow other modals/loaders to show without z-index conflict
+                    hideConfirmModal();
+
+                    // Execute callback
+                    if (callback) {
+                        try {
+                            await callback();
+                        } catch (e) {
+                            console.error("Error in confirm callback:", e);
+                            showToast("Error", "Action failed to execute", "error");
+                        }
+                    }
+                };
             }
-
-            currentConfirmCallback = callback;
-
-            // Set up one-time click handler
-            btn.onclick = () => {
-                if (currentConfirmCallback) currentConfirmCallback();
-                hideConfirmModal();
-            };
 
             if (modal) {
                 modal.style.display = 'flex';
