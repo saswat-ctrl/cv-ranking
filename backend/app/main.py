@@ -23,6 +23,42 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# --- Startup Health Check ---
+import sys
+import logging
+
+warmup_logger = logging.getLogger("startup_check")
+
+@app.on_event("startup")
+def startup_checks():
+    """
+    Perform critical startup checks.
+    1. Validate Python version (avoid 3.12 for ML workloads unless verified)
+    2. Check model loading (Fail Fast)
+    """
+    # 1. Check Python Version
+    if sys.version_info >= (3, 12):
+        warmup_logger.warning("⚠️  Running on Python 3.12+. ML workloads may be unstable. Validated up to 3.11.")
+    
+    # 2. Model Load Check
+    try:
+        warmup_logger.info("Initializing ML models...")
+        # Avoid direct top-level import to prevent premature loading
+        import transformers as tr
+        
+        # Load critical model artifacts
+        tr.AutoTokenizer.from_pretrained("bert-base-uncased")
+        tr.AutoModel.from_pretrained("bert-base-uncased")
+        
+        warmup_logger.info("✅ ML core dependencies loaded successfully")
+    except Exception as e:
+        warmup_logger.critical(f"❌ CRITICAL FAILURE: Could not load ML models: {e}")
+        # Fail fast - do not allow app to start without ML core
+        sys.exit(1)
+# --------------------
+
+
+
 @app.middleware("http")
 async def logging_middleware(request: Request, call_next) -> Response:
     request_id = request.headers.get("X-Request-ID", str(uuid.uuid4()))
@@ -94,14 +130,9 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 async def general_exception_handler(request: Request, exc: Exception):
     import traceback
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
-    # Print to console for debugging
-    print(f"\n{'='*80}")
-    print(f"UNHANDLED EXCEPTION in {request.method} {request.url.path}")
-    print(f"Exception type: {type(exc).__name__}")
-    print(f"Exception message: {exc}")
-    print(f"Traceback:")
-    traceback.print_exc()
-    print(f"{'='*80}\n")
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    # detailed traceback suppressed in production
+
     return JSONResponse(
         status_code=500,
         content={
@@ -125,6 +156,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+print(f"DEBUG: Allowed CORS Origins: {[str(origin).rstrip('/') for origin in settings.BACKEND_CORS_ORIGINS]}")
+
+
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -144,3 +178,5 @@ async def health_check(db: AsyncSession = Depends(deps.get_db)):
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=f"Database connection failed: {str(e)}"
         )
+
+

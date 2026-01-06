@@ -19,3 +19,23 @@
 ## Policy
 Production is the source of truth during incidents.
 Git must reflect Production behavior after stabilization.
+
+## Verification Timeline — Dec 28 2025
+
+### Context
+- **Phase**: Post-deploy verification
+- **Branch**: `chore/prod-sync-2025-12-28`
+- **Environment**: Python 3.12, updated `transformers`, ML dependencies unaligned post-hotfix.
+- **State**: Main behind production.
+
+### Event
+- **Observation**: "Embedding generation failed: Could not find BertModel…"
+- **Detection Method**: Manual functional validation of "Generate AI Score".
+- **Impact**: Zero user impact. Not a Sev incident.
+
+### Resolution
+- Issue classified as environment/dependency mismatch.
+- Resolved via Prod sync, dependency alignment (pinning), and tagging `prod-2025-12-28-stable`.
+
+### Key Takeaway
+This was a **verification finding**, not a production failure during user traffic. It occurred in the intended validation window.
