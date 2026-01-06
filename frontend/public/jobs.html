@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Jobs - HR Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#16a34a", // green-600
+                        "background-light": "#f8fafc", // slate-50
+                        "background-dark": "#0f172a", // slate-900
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem", // 8px
+                    },
+                },
+            },
+        };
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Tooltip styles */
+    .nav-item {
+      position: relative;
+    }
+    
+    .nav-item .tooltip {
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      background-color: rgb(15 23 42);
+      color: white;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease-in-out;
+      z-index: 50;
+    }
+    
+    .nav-item .tooltip::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0.375rem solid transparent;
+      border-right-color: rgb(15 23 42);
+    }
+    
+    .nav-item:hover .tooltip {
+      opacity: 1;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .nav-item .tooltip {
+        background-color: rgb(51 65 85);
+      }
+      .nav-item .tooltip::before {
+        border-right-color: rgb(51 65 85);
+      }
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200">
+    <!-- Page Loader -->
+    <div id="page-loader"
+        style="position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: white;">
+        <div
+            style="height: 64px; width: 64px; border-radius: 50%; border: 4px solid #e5e7eb; border-top-color: #16a34a; animation: spin 1s linear infinite;">
+        </div>
+        <style>
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </div>
+    <div class="flex h-screen">
+        <aside
+            class="w-20 flex flex-col items-center border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+            <div class="h-16 flex items-center justify-center border-b border-slate-200 dark:border-slate-800 w-full">
+                <img src="logo.png" alt="HR Dashboard Logo" class="w-12 h-12 object-contain" />
+            </div>
+            <nav class="flex-1 flex flex-col items-center w-full py-6 space-y-4">
+                <a class="nav-item flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    href="/dashboard.html">
+                    <span class="material-symbols-outlined text-2xl">dashboard</span>
+                    <span class="sr-only">Dashboard</span>
+                    <span class="tooltip">Dashboard</span>
+                </a>
+                <a class="nav-item flex items-center justify-center p-3 rounded text-primary bg-green-100 dark:bg-green-900/50"
+                    href="/jobs.html">
+                    <span class="material-symbols-outlined text-2xl">work</span>
+                    <span class="sr-only">Jobs</span>
+                    <span class="tooltip">Jobs</span>
+                </a>
+                <a class="nav-item flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    href="/settings.html">
+                    <span class="material-symbols-outlined text-2xl">settings</span>
+                    <span class="sr-only">Settings</span>
+                    <span class="tooltip">Settings</span>
+                </a>
+            </nav>
+            <div class="py-4 border-t border-slate-200 dark:border-slate-800 w-full flex justify-center">
+                <a id="logout-btn"
+                    class="nav-item flex items-center justify-center p-3 rounded text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                    href="javascript:void(0)">
+                    <span class="material-symbols-outlined text-2xl">logout</span>
+                    <span class="sr-only">Logout</span>
+                    <span class="tooltip">Logout</span>
+                </a>
+            </div>
+        </aside>
+        <main class="flex-1 overflow-y-auto">
+            <header
+                class="sticky top-0 z-10 flex items-center justify-between h-16 px-8 border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+                <div>
+                    <h2 class="text-xl font-semibold text-slate-900 dark:text-white">Jobs</h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Manage your job postings and rankings</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <a href="/profile.html" class="block">
+                        <div id="profile-initial"
+                            class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                            -
+                        </div>
+                    </a>
+                </div>
+            </header>
+            <div class="p-8">
+                <!-- Header with search and create button -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex-1 flex gap-4 max-w-2xl">
+                        <div class="relative flex-1">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                            <input id="search-input" type="text" placeholder="Search jobs by title or description..."
+                                class="w-full pl-10 pr-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary dark:bg-slate-800 dark:text-white placeholder-slate-400">
+                        </div>
+                        <select id="status-filter"
+                            class="px-4 pr-8 py-2 border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-primary focus:border-primary dark:bg-slate-800 dark:text-white">
+                            <option value="ALL">All Statuses</option>
+                            <option value="OPEN">Open</option>
+                            <option value="CLOSED">Closed</option>
+                            <option value="ARCHIVED">Archived</option>
+                        </select>
+                    </div>
+                    <button id="create-job-btn"
+                        class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded bg-primary hover:bg-green-700">
+                        <span class="material-symbols-outlined text-base">add</span>
+                        Create Job
+                    </button>
+                </div>
+
+                <!-- Jobs Grid -->
+                <div id="jobs-grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- Jobs will be dynamically inserted here -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state"
+                    class="hidden bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800 p-12 text-center">
+                    <span class="material-symbols-outlined text-slate-400 text-6xl mb-4 block">work</span>
+                    <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">No jobs yet</h3>
+                    <p class="text-slate-500 dark:text-slate-400 mb-6">Create your first job posting to start ranking
+                        candidates</p>
+                    <button id="create-first-job-btn"
+                        class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white rounded bg-primary hover:bg-green-700">
+                        <span class="material-symbols-outlined text-base">add</span>
+                        Create Your First Job
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = '/api/v1';
+        let allJobs = [];
+        let filteredJobs = [];
+        let searchQuery = '';
+        let statusFilter = 'ALL';
+        window.isModalOpen = false;
+
+        // Auth Check
+        function checkAuth() {
+            return localStorage.getItem('token');
+        }
+
+        // Fetch Helper
+        async function fetchWithAuth(endpoint, options = {}) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/landing.html';
+                return null;
+            }
+
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+                ...options.headers
+            };
+
+            if (!(options.body instanceof FormData) && !headers['Content-Type']) {
+                headers['Content-Type'] = 'application/json';
+            }
+
+            const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
+
+            try {
+                const response = await fetch(url, { ...options, headers });
+                if (response.status === 401) {
+                    localStorage.removeItem('token');
+                    alert("Session expired. Please log in again.");
+                    window.location.href = '/landing.html';
+                    return null;
+                }
+                return response;
+            } catch (error) {
+                console.error('Fetch Error:', error);
+                return null;
+            }
+        }
+
+        // Defensive JSON Helper
+        async function getSafeJson(response) {
+            if (!response) return null;
+            try {
+                const text = await response.text();
+                return text ? JSON.parse(text) : {};
+            } catch (e) {
+                console.error('JSON Parse Error:', e);
+                return null;
+            }
+        }
+        // Get Status Color
+        function getStatusColor(status) {
+            const s = (status || 'OPEN').toUpperCase();
+            switch (s) {
+                case 'OPEN':
+                    return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+                case 'REVIEWING':
+                    return 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300';
+                case 'CLOSED':
+                    return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+                case 'ARCHIVED':
+                    return 'bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300';
+                default:
+                    return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+            }
+        }
+
+        // Delete Job with Confirmation
+        async function deleteJob(event, jobId, jobTitle) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault(); // Prevent accidental navigation
+            }
+
+            showConfirmModal(`Are you sure to delete this job? This job and all its candidates would be permanently removed.`, async () => {
+                try {
+                    // Show blocking loader
+                    // Create temp loader if showActionLoader not available (it IS available in jobs.html)
+                    // Assuming showActionLoader exists or I should use simple logic
+                    // jobs.html has "action-loader" div at the bottom?
+                    // View file 1-800 didn't show it explicitly but candidates.html has it.
+                    // Assuming simpler generic loader or simple await.
+                    // I'll assume showActionLoader might NOT be globally available in jobs.html context unless I validated it.
+                    // Re-checking jobs.html contents... 
+                    // Ah, I didn't verify showActionLoader exists in jobs.html. better use simple fetch logic.
+                    // Or better, just do the delete.
+
+                    const response = await fetchWithAuth(`/jobs/${jobId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response && (response.ok || response.status === 204)) {
+                        showToast("Job Deleted", `Job "${jobTitle}" has been deleted.`, "success");
+                        await loadJobs(); // Refresh grid
+                    } else {
+                        const error = await getSafeJson(response) || {};
+                        showToast("Delete Failed", error.detail || "Failed to delete job.", "error");
+                    }
+                } catch (error) {
+                    console.error('Error deleting job:', error);
+                    showToast("Delete Failed", "Error deleting job. Please try again.", "error");
+                }
+            });
+        }
+
+        // Load User Profile
+        async function loadUserProfile() {
+            const response = await fetchWithAuth('/auth/me');
+            const user = await getSafeJson(response);
+            if (response && response.ok && user) {
+                const nameToDisplay = user.full_name || user.email || '-';
+                document.getElementById('profile-initial').textContent = nameToDisplay.charAt(0).toUpperCase();
+            }
+        }
+
+        // Load Jobs
+        async function loadJobs() {
+            const jobsResponse = await fetchWithAuth('/jobs');
+            if (!jobsResponse) {
+                document.getElementById('page-loader').style.display = 'none';
+                return;
+            }
+
+            const jobs = await getSafeJson(jobsResponse) || [];
+
+            // Fetch candidate count for each job
+            const jobsWithCounts = await Promise.all(
+                jobs.map(async (job) => {
+                    try {
+                        const candidatesResponse = await fetchWithAuth(`/jobs/${job.id}/candidates`);
+                        if (candidatesResponse && candidatesResponse.ok) {
+                            const candidates = await getSafeJson(candidatesResponse) || [];
+                            return { ...job, candidate_count: candidates.length };
+                        }
+                        return { ...job, candidate_count: 0 };
+                    } catch {
+                        return { ...job, candidate_count: 0 };
+                    }
+                })
+            );
+
+            allJobs = jobsWithCounts.slice().reverse(); // Store newest first
+            applyFilters();
+            document.getElementById('page-loader').style.display = 'none';
+        }
+
+        // Apply Filters
+        function applyFilters() {
+            filteredJobs = allJobs.filter(job => {
+                const matchesSearch = searchQuery === '' ||
+                    job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    (job.extracted_text && job.extracted_text.toLowerCase().includes(searchQuery.toLowerCase()));
+
+                const matchesStatus = statusFilter === 'ALL' || (job.status || 'OPEN').toUpperCase() === statusFilter;
+
+                return matchesSearch && matchesStatus;
+            });
+
+            renderJobs();
+        }
+
+        // Render Jobs Grid
+        function renderJobs() {
+            const grid = document.getElementById('jobs-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (filteredJobs.length === 0) {
+                grid.innerHTML = '';
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.classList.remove('hidden');
+            grid.innerHTML = '';
+
+            filteredJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-800 p-6 hover:shadow-md transition-shadow cursor-pointer';
+
+                const date = new Date(job.created_at).toLocaleDateString();
+                const statusColor = getStatusColor(job.status);
+                const description = job.extracted_text ? job.extracted_text.substring(0, 100) + '...' : '';
+
+                card.innerHTML = `
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white line-clamp-1">${job.title}</h3>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor}">
+                ${(job.status || 'OPEN').toUpperCase()}
+              </span>
+              <button type="button" onclick="deleteJob(event, '${job.id}', '${job.title.replace(/'/g, "\\'")}')" class="p-1.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full transition-colors" title="Delete Job">
+                <span class="material-symbols-outlined text-lg">delete</span>
+              </button>
+            </div>
+          </div>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">${description}</p>
+          <div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400 mb-4">
+            <div class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-base">groups</span>
+              <span>${job.candidate_count || 0} candidates</span>
+            </div>
+            <div>${date}</div>
+          </div>
+          <div class="flex gap-2">
+            <button type="button" onclick="event.stopPropagation(); showUploadCandidatesModal('${job.id}', event)" class="flex-1 px-3 py-2 text-sm font-medium border rounded border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700">
+              Upload CVs
+            </button>
+            <button type="button" onclick="window.location.href='/candidates.html?jobId=${job.id}'" class="flex-1 px-3 py-2 text-sm font-medium text-white rounded bg-primary hover:bg-green-700">
+              View Candidates
+            </button>
+          </div>
+        `;
+
+                card.addEventListener('click', (e) => {
+                    if (e.target.tagName !== 'BUTTON') {
+                        // Navigate to candidates page instead of job details
+                        window.location.href = `/candidates.html?jobId=${job.id}`;
+                    }
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Event Listeners
+        window.addEventListener('beforeunload', (e) => {
+            console.trace("🚨 PAGE UNLOADING");
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadUserProfile();
+            loadJobs();
+            // console.log("DOM loaded — init DISABLED");
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/landing.html';
+                return;
+            }
+
+            // Logout
+            document.getElementById('logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                window.location.href = '/landing.html';
+            });
+
+            // Search
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                applyFilters();
+            });
+
+            // Status Filter
+            document.getElementById('status-filter').addEventListener('change', (e) => {
+                statusFilter = e.target.value;
+                applyFilters();
+            });
+
+            // Create Job buttons - Show Modal
+            document.getElementById('create-job-btn').addEventListener('click', (e) => {
+                if (e) e.preventDefault();
+                showJobModal();
+            });
+
+            document.getElementById('create-first-job-btn')?.addEventListener('click', (e) => {
+                if (e) e.preventDefault();
+                showJobModal();
+            });
+        });
+
+        // Modal Functions
+        function showJobModal() {
+            console.log('showJobModal called');
+            window.isModalOpen = true;
+            const modal = document.getElementById('job-modal'); // Define modal here
+            document.body.classList.add('modal-open');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            modal.offsetHeight; // force reflow
+        }
+
+        function hideJobModal() {
+            console.log('hideJobModal called');
+            window.isModalOpen = false;
+            document.body.classList.remove('modal-open');
+            document.getElementById('job-modal').style.display = 'none'; // Corrected typo
+            document.body.style.overflow = 'auto';
+            document.getElementById('job-form').reset();
+        }
+
+        // Handle Job Form Submission
+        async function handleJobSubmit(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('job-title').value;
+            const description = document.getElementById('job-description').value;
+            const submitBtn = document.getElementById('job-submit-btn');
+
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Creating...';
+
+            try {
+                const response = await fetchWithAuth('/jobs', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: title,
+                        description: description
+                    })
+                });
+
+                if (response && response.ok) {
+                    const job = await getSafeJson(response) || {};
+                    hideJobModal();
+
+                    // Refresh jobs list and open upload modal
+                    await loadJobs();
+                    showUploadCandidatesModal(job.id);
+                } else {
+                    const error = await getSafeJson(response) || {};
+                    showToast("Creation Failed", error.detail || "Failed to create job.", "error");
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Next: Upload CVs <span class="material-symbols-outlined text-[18px]">arrow_forward</span>';
+                }
+            } catch (error) {
+                console.error('Error creating job:', error);
+                showToast("Creation Failed", "Error creating job. Please try again.", "error");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Next: Upload CVs <span class="material-symbols-outlined text-[18px]">arrow_forward</span>';
+            }
+        }
+    </script>
+
+    <!-- Create Job Modal -->
+    <div id="job-modal"
+        style="display: none; position: fixed; inset: 0; z-index: 9998; background-color: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center; padding: 1rem;">
+        <div
+            class="w-full max-w-[800px] bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div
+                class="px-8 py-6 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between shrink-0 bg-white dark:bg-gray-800 z-10">
+                <h2 class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">
+                    Create New Job
+                </h2>
+                <button onclick="hideJobModal()"
+                    class="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="material-symbols-outlined text-[24px] block">close</span>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="job-form" onsubmit="handleJobSubmit(event)"
+                class="px-8 py-8 flex flex-col gap-8 flex-1 overflow-y-auto" style="scrollbar-width: thin;">
+                <div class="flex flex-col gap-2">
+                    <label class="text-gray-900 dark:text-white text-sm font-medium" for="job-title">
+                        Job Title <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                        class="w-full px-4 py-3 bg-white dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-base font-normal shadow-sm"
+                        id="job-title" placeholder="e.g. Senior Product Manager" type="text" required />
+                    <p class="text-gray-600 dark:text-gray-400 text-xs font-normal">
+                        A clear and concise title will attract more qualified candidates.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-2 flex-1 min-h-[300px]">
+                    <label class="text-gray-900 dark:text-white text-sm font-medium" for="job-description">
+                        Job Description <span class="text-red-500">*</span>
+                    </label>
+                    <textarea
+                        class="w-full flex-1 p-4 bg-white dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg resize-none text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-base font-normal leading-relaxed shadow-sm"
+                        id="job-description" placeholder="Paste the full job description here..." required></textarea>
+                </div>
+            </form>
+
+            <!-- Modal Footer -->
+            <div
+                class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">
+                <button onclick="hideJobModal()" type="button"
+                    class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium px-6 py-3 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors">
+                    Cancel
+                </button>
+                <button id="job-submit-btn" form="job-form" type="submit"
+                    class="flex items-center gap-2 bg-primary hover:bg-green-700 text-white text-sm font-bold px-6 py-3 rounded-lg shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px] active:translate-y-0">
+                    Next: Upload CVs
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Custom scrollbar for modal */
+        #job-form::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #job-form::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #job-form::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 20px;
+        }
+
+        .dark #job-form::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+        }
+
+        #job-form::-webkit-scrollbar-thumb:hover {
+            background-color: #d1d5db;
+        }
+
+        .dark #job-form::-webkit-scrollbar-thumb:hover {
+            background-color: #374151;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Upload Modal Styles */
+        .upload-step-content {
+            display: none;
+        }
+
+        .upload-step-content.active {
+            display: block;
+        }
+    </style>
+
+    <!-- Upload Candidates Modal -->
+    <div id="upload-candidates-modal"
+        style="display: none; position: fixed; inset: 0; z-index: 9998; background-color: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center; padding: 1rem; overflow-y: auto;">
+
+
+        <!-- Step 4: Success Summary -->
+        <div id="upload-step-4" class="upload-step-content" style="width: 100%; max-width: 600px; margin: auto;">
+            <div
+                class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col items-center text-center p-8">
+                <div
+                    class="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6">
+                    <span
+                        class="material-symbols-outlined text-green-600 dark:text-green-400 text-5xl">check_circle</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Upload Complete</h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-8">Your candidates have been successfully processed.</p>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-4 gap-4 w-full mb-8">
+                    <div
+                        class="p-4 rounded-xl bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800">
+                        <p class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-1">Total
+                        </p>
+                        <p id="success-stat-total" class="text-2xl font-bold text-blue-700 dark:text-blue-300">0</p>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-green-50 dark:bg-green-900/10 border border-green-100 dark:border-green-800">
+                        <p class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wide mb-1">
+                            Added</p>
+                        <p id="success-stat-added" class="text-2xl font-bold text-green-700 dark:text-green-300">0</p>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-orange-50 dark:bg-orange-900/10 border border-orange-100 dark:border-orange-800">
+                        <p class="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wide mb-1">
+                            Duplicates</p>
+                        <p id="success-stat-duplicates" class="text-2xl font-bold text-orange-700 dark:text-orange-300">
+                            0</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-800">
+                        <p class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wide mb-1">Failed
+                        </p>
+                        <p id="success-stat-failed" class="text-2xl font-bold text-red-700 dark:text-red-300">0</p>
+                    </div>
+                </div>
+
+                <button onclick="window.location.href = `/candidates.html?jobId=${uploadState.jobId}`"
+                    class="w-full bg-primary hover:bg-[#14a081] text-white text-lg font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px]">
+                    View Job Candidates
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 1: Upload New Candidates -->
+        <div id="upload-step-1" class="upload-step-content active" style="width: 100%; max-width: 640px; margin: auto;">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col"
+                style="height: 750px;">
+                <!-- Header -->
+                <div class="px-8 pt-8 pb-4 flex flex-col gap-2 shrink-0">
+                    <div class="flex items-center justify-between">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Step 1 of 3</p>
+                        <button onclick="closeUploadModal()"
+                            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                            title="Close">
+                            <span class="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                    </div>
+                    <h2 class="text-gray-900 dark:text-white text-3xl font-bold">Upload New Candidates</h2>
+                    <p class="text-gray-600 dark:text-gray-300 text-base">
+                        Add CVs for this job by uploading PDF or Word documents. You can skip this step if you want to
+                        import candidates later.
+                    </p>
+                </div>
+
+                <!-- Body -->
+                <div class="px-8 py-2 flex flex-col gap-6 flex-1 min-h-0">
+                    <!-- Upload Area -->
+                    <div class="relative group cursor-pointer shrink-0"
+                        onclick="document.getElementById('file-input-upload').click()">
+                        <div
+                            class="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-[#dce5e3] dark:border-gray-600 bg-[#E9FBEF] dark:bg-green-900/10 hover:bg-[#dff5ea] dark:hover:bg-green-900/20 transition-colors px-6 py-6">
+                            <div
+                                class="w-14 h-14 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-0.5 text-center">
+                                <p class="text-gray-900 dark:text-white text-lg font-bold">Drag & drop CVs here</p>
+                                <p class="text-gray-500 dark:text-gray-400 text-xs">or select files from your computer
+                                </p>
+                            </div>
+                            <button type="button"
+                                class="flex items-center justify-center gap-2 h-10 px-5 bg-primary hover:bg-[#14a081] text-white text-xs font-bold rounded-lg transition-colors shadow-sm">
+                                <span class="material-symbols-outlined text-[18px]">folder_open</span>
+                                Browse Files
+                            </button>
+                            <p class="text-[10px] text-gray-400 dark:text-gray-500">Supported formats: PDF, DOC, DOCX
+                            </p>
+                        </div>
+                        <input type="file" id="file-input-upload" multiple accept=".pdf,.doc,.docx"
+                            style="display: none;" onchange="handleUploadFiles(this.files)">
+                    </div>
+
+                    <!-- Files List -->
+                    <div class="flex flex-col gap-3 min-h-0 flex-1">
+                        <div class="flex items-center justify-between shrink-0">
+                            <h3 class="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                                Attached Files <span id="upload-file-count"
+                                    class="text-gray-400 font-normal normal-case ml-1">(0)</span>
+                            </h3>
+                        </div>
+                        <div id="upload-files-list" class="flex flex-col gap-3 overflow-y-auto pr-2 -mr-2 pb-2"
+                            style="max-height: 220px; scrollbar-width: thin;">
+                            <p class="text-sm text-gray-400 text-center py-8">No files uploaded yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div
+                    class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">
+                    <button onclick="skipToStep2()"
+                        class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+                        Skip & Continue
+                    </button>
+                    <button onclick="goToUploadStep(2)"
+                        class="flex items-center gap-2 bg-primary hover:bg-[#14a081] text-white text-sm font-bold px-6 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px]">
+                        Next: Import From Jobs
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Import from Existing Jobs - Unified Split Panel -->
+        <div id="upload-step-2" class="upload-step-content" style="width: 100%; max-width: 1200px; margin: auto;">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col"
+                style="height: 700px;">
+                <!-- Header -->
+                <div class="px-8 pt-8 pb-4 flex flex-col gap-2 shrink-0">
+                    <div class="flex items-center justify-between">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Step 2 of 3</p>
+                        <button onclick="closeUploadModal()"
+                            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                            title="Close">
+                            <span class="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                    </div>
+                    <h2 class="text-gray-900 dark:text-white text-3xl font-bold">Import From Existing Jobs</h2>
+                    <p class="text-gray-600 dark:text-gray-300 text-base">
+                        Select candidates from other jobs to import. Duplicates are automatically detected.
+                    </p>
+                </div>
+
+                <!-- Split Panel Body -->
+                <div class="flex flex-1 min-h-0">
+                    <!-- Left Panel: Jobs List (30%) -->
+                    <div
+                        class="w-[30%] border-r border-gray-200 dark:border-gray-700 flex flex-col bg-[#f6f8f8] dark:bg-gray-900/30">
+                        <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Source Jobs</h3>
+                        </div>
+                        <div id="jobs-list-panel" class="flex-1 overflow-y-auto p-3 flex flex-col gap-2"
+                            style="scrollbar-width: thin;">
+                            <p class="text-sm text-gray-400 text-center py-8">Loading jobs...</p>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Candidates List (70%) -->
+                    <div class="flex-1 flex flex-col min-w-0">
+                        <!-- Search Bar -->
+                        <div class="px-6 py-3 border-b border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-lg">search</span>
+                                <input id="candidate-search-unified" oninput="filterCandidatesUnified(this.value)"
+                                    class="w-full pl-10 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-gray-700 dark:text-gray-200 placeholder-gray-400"
+                                    placeholder="Search candidates by name or email..." type="text" />
+                            </div>
+                        </div>
+
+                        <!-- Candidates List -->
+                        <div id="candidates-list-panel" class="flex-1 overflow-y-auto p-6 flex flex-col gap-3"
+                            style="scrollbar-width: thin;">
+                            <div class="text-center py-12">
+                                <span
+                                    class="material-symbols-outlined text-[48px] text-gray-300 dark:text-gray-600">person_search</span>
+                                <p class="text-sm text-gray-400 mt-2">Select a job from the left to view candidates</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Section: Selected Candidates -->
+                <div
+                    class="px-6 py-4 border-t-2 border-gray-200 dark:border-gray-700 bg-[#f6f8f8] dark:bg-gray-900/30 shrink-0">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Selected Candidates
+                        </h3>
+                        <span id="import-selected-count-unified"
+                            class="bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">0
+                            Selected</span>
+                    </div>
+                    <div id="import-selected-list-unified"
+                        class="flex flex-wrap gap-2 min-h-[60px] max-h-[120px] overflow-y-auto"
+                        style="scrollbar-width: thin;">
+                        <p class="text-sm text-gray-400 w-full text-center py-4">No candidates selected yet</p>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div
+                    class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">
+                    <button onclick="goToUploadStep(1)"
+                        class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg">arrow_back</span>
+                        Back
+                    </button>
+                    <button onclick="goToUploadStep(3)"
+                        class="flex items-center gap-2 bg-primary hover:bg-[#14a081] text-white text-sm font-bold px-6 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px]">
+                        Next: Review & Confirm
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Review & Confirm -->
+        <div id="upload-step-3" class="upload-step-content" style="width: 100%; max-width: 900px; margin: auto;">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-slate-200 dark:border-gray-700 overflow-hidden flex flex-col"
+                style="max-height: 85vh;">
+                <!-- Header -->
+                <div class="px-8 pt-8 pb-4 flex flex-col gap-2 shrink-0 border-b border-transparent">
+                    <div class="flex items-center justify-between">
+                        <p class="text-gray-500 dark:text-gray-400 text-sm font-medium">Step 3 of 3</p>
+                        <button onclick="closeUploadModal()"
+                            class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                            title="Close">
+                            <span class="material-symbols-outlined text-2xl">close</span>
+                        </button>
+                    </div>
+                    <h2 class="text-gray-900 dark:text-white text-3xl font-bold">Review & Confirm</h2>
+                    <p class="text-gray-600 dark:text-gray-300 text-base">
+                        Please review your uploaded files and imported candidates. Ensure everything is correct before
+                        finalizing.
+                    </p>
+                </div>
+
+                <!-- Body (Scrollable) -->
+                <div class="flex-1 overflow-y-auto px-8 pb-8 pt-2" style="scrollbar-width: thin;">
+                    <!-- Uploaded Files Section -->
+                    <div class="mb-8">
+                        <div
+                            class="sticky top-0 bg-white dark:bg-gray-800 z-10 py-3 mb-2 border-b border-gray-50 dark:border-gray-700/50">
+                            <h3
+                                class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider flex items-center gap-2">
+                                Uploaded Files
+                                <span id="review-files-count"
+                                    class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full font-semibold">0</span>
+                            </h3>
+                        </div>
+                        <div id="review-files-list" class="space-y-3">
+                            <p class="text-sm text-gray-400 text-center py-4">No files uploaded</p>
+                        </div>
+                    </div>
+
+                    <!-- Imported Candidates Section -->
+                    <div class="relative py-4">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-200 dark:border-gray-700"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div
+                            class="sticky top-0 bg-white dark:bg-gray-800 z-10 py-3 mb-2 border-b border-gray-50 dark:border-gray-700/50">
+                            <h3
+                                class="text-sm font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider flex items-center gap-2">
+                                Imported Candidates
+                                <span id="review-candidates-count"
+                                    class="bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs px-2 py-0.5 rounded-full font-semibold">0</span>
+                            </h3>
+                        </div>
+                        <div id="review-candidates-list" class="space-y-2">
+                            <p class="text-sm text-gray-400 text-center py-4">No candidates imported</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div
+                    class="px-8 py-6 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800 shrink-0">
+                    <button onclick="goToUploadStep(2)"
+                        class="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors flex items-center gap-2 group">
+                        <span
+                            class="material-symbols-outlined text-lg group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                        Back
+                    </button>
+                    <div class="flex items-center gap-4">
+                        <span id="review-total-count" class="text-sm text-gray-500 font-medium">0 items selected</span>
+                        <button onclick="confirmAndSubmit()" id="confirm-submit-btn"
+                            class="flex items-center gap-2 bg-primary hover:bg-[#14a081] text-white text-sm font-bold px-8 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:translate-y-[-1px] hover:shadow-primary/30">
+                            Confirm & Submit
+                            <span class="material-symbols-outlined text-[18px]">check</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Upload Candidates Modal State
+        const uploadState = {
+            currentStep: 1,
+            jobId: null,
+            uploadedFiles: [],
+            selectedCandidates: [],
+            allJobs: [],
+            currentJobCandidates: [],
+            sourceJobCandidates: [],
+            duplicateEmails: new Set(),
+            tempSelectedInPanel: new Set(),
+            currentSourceJobId: null,
+            currentSearchQuery: ''
+        };
+
+        // Show Upload Modal
+        function showUploadCandidatesModal(jobId, event) {
+            if (event) event.preventDefault();
+            console.log('showUploadCandidatesModal called for Job:', jobId);
+
+            uploadState.jobId = jobId;
+            uploadState.currentStep = 1;
+            uploadState.uploadedFiles = [];
+            uploadState.selectedCandidates = [];
+            uploadState.tempSelectedInPanel = new Set();
+
+            document.getElementById('upload-candidates-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            window.isModalOpen = true; // Set modal open flag
+
+            loadJobsForImport();
+            loadCurrentJobCandidates();
+        }
+
+        // Hide Upload Modal
+        function hideUploadCandidatesModal() {
+            console.log('hideUploadCandidatesModal called');
+            document.getElementById('upload-candidates-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            window.isModalOpen = false; // Clear modal open flag
+            resetUploadModal();
+        }
+
+        // Alias for close button
+        function closeUploadModal() {
+            hideUploadCandidatesModal();
+        }
+
+        // Reset Modal
+        function resetUploadModal() {
+            uploadState.currentStep = 1;
+            uploadState.uploadedFiles = [];
+            uploadState.selectedCandidates = [];
+            uploadState.tempSelectedInPanel = new Set();
+            goToUploadStep(1);
+            renderUploadFilesList();
+        }
+
+        // Navigate Steps
+        function goToUploadStep(step) {
+            if (uploadState.currentStep === 2 && step === 3) {
+                const sourceJob = uploadState.allJobs.find(j => j.id === uploadState.currentSourceJobId);
+                if (sourceJob && uploadState.tempSelectedInPanel.size > 0) {
+                    uploadState.tempSelectedInPanel.forEach(candidateId => {
+                        const candidate = uploadState.sourceJobCandidates.find(c => c.id === candidateId);
+                        if (candidate && !uploadState.selectedCandidates.find(sc => sc.id === candidate.id)) {
+                            uploadState.selectedCandidates.push({
+                                ...candidate,
+                                sourceJobId: uploadState.currentSourceJobId,
+                                sourceJobTitle: sourceJob.title
+                            });
+                        }
+                    });
+                    uploadState.tempSelectedInPanel.clear();
+                }
+            }
+
+            document.querySelectorAll('.upload-step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`upload-step-${step}`).classList.add('active');
+            uploadState.currentStep = step;
+
+            if (step === 3) {
+                renderReviewSummary();
+            }
+        }
+
+        function skipToStep2() {
+            goToUploadStep(2);
+        }
+
+        // File Upload Handling
+        function handleUploadFiles(files) {
+            const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+
+            Array.from(files).forEach(file => {
+                if (validTypes.includes(file.type)) {
+                    uploadState.uploadedFiles.push({
+                        file: file,
+                        name: file.name,
+                        size: formatFileSize(file.size),
+                        type: file.type,
+                        uploadedAt: new Date()
+                    });
+                } else {
+                    showToast("Invalid File Type", `File type not supported: ${file.name}`, "warning");
+                }
+            });
+
+            renderUploadFilesList();
+        }
+
+        function removeUploadFile(index) {
+            uploadState.uploadedFiles.splice(index, 1);
+            renderUploadFilesList();
+        }
+
+        function renderUploadFilesList() {
+            const list = document.getElementById('upload-files-list');
+            const count = document.getElementById('upload-file-count');
+
+            count.textContent = `(${uploadState.uploadedFiles.length})`;
+
+            if (uploadState.uploadedFiles.length === 0) {
+                list.innerHTML = '<p class="text-sm text-gray-400 text-center py-8">No files uploaded yet</p>';
+                return;
+            }
+
+            list.innerHTML = uploadState.uploadedFiles.map((fileData, index) => {
+                const icon = fileData.type.includes('pdf') ? 'picture_as_pdf' : 'description';
+                const iconBg = fileData.type.includes('pdf') ? 'bg-red-50 dark:bg-red-900/20 text-red-500 dark:text-red-400' : 'bg-blue-50 dark:bg-blue-900/20 text-blue-500 dark:text-blue-400';
+
+                return `
+                    <div class="flex items-center gap-4 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow shrink-0">
+                        <div class="flex items-center justify-center rounded-lg ${iconBg} shrink-0 w-12 h-12">
+                            <span class="material-symbols-outlined">${icon}</span>
+                        </div>
+                        <div class="flex flex-col flex-1 min-w-0">
+                            <p class="text-gray-900 dark:text-white text-sm font-medium truncate">${fileData.name}</p>
+                            <p class="text-gray-400 dark:text-gray-400 text-xs">${fileData.size} • Just now</p>
+                        </div>
+                        <div class="shrink-0 pr-2">
+                            <button onclick="removeUploadFile(${index})" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Load Jobs for Import
+        async function loadJobsForImport() {
+            if (window.isModalOpen) {
+                console.log("Skipping loadJobsForImport — modal open");
+                // This function is specifically for loading jobs into the import modal,
+                // so we might not want to skip it even if another modal is open.
+                // However, if the intent is to prevent background refreshes, this check is valid.
+                // For now, I'll keep it as per the instruction's implied intent for `loadJobs`.
+                // If this causes issues, it might need to be removed or adjusted for `loadJobsForImport`.
+            }
+            try {
+                const response = await fetchWithAuth('/jobs');
+                if (response && response.ok) {
+                    uploadState.allJobs = await getSafeJson(response) || [];
+                    renderJobsDropdown();
+                }
+            } catch (error) {
+                console.error('Failed to load jobs:', error);
+            }
+        }
+
+        function renderJobsDropdown() {
+            const panel = document.getElementById('jobs-list-panel');
+            const availableJobs = uploadState.allJobs.filter(job => job.id !== uploadState.jobId);
+
+            if (availableJobs.length === 0) {
+                panel.innerHTML = '<p class="text-sm text-gray-400 text-center py-8">No other jobs available</p>';
+                return;
+            }
+
+            panel.innerHTML = availableJobs.map(job => {
+                const isActive = uploadState.currentSourceJobId === job.id;
+                return `
+                    <div onclick="selectJobUnified('${job.id}')" class="cursor-pointer p-3 rounded-lg border transition-all ${isActive
+                        ? 'border-primary bg-[#E9FBEF] dark:bg-green-900/10'
+                        : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/50'
+                    }">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="material-symbols-outlined text-primary text-[18px]">work</span>
+                            <p class="text-sm font-bold text-gray-900 dark:text-white truncate flex-1">${job.title}</p>
+                        </div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 pl-6">Candidates available</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function loadCurrentJobCandidates() {
+            try {
+                const response = await fetchWithAuth(`/jobs/${uploadState.jobId}/candidates`);
+                if (response && response.ok) {
+                    uploadState.currentJobCandidates = await getSafeJson(response) || [];
+                    uploadState.duplicateEmails = new Set(uploadState.currentJobCandidates.map(c => c.email.toLowerCase()));
+                }
+            } catch (error) {
+                console.error('Failed to load current job candidates:', error);
+            }
+        }
+
+        async function selectJobUnified(jobId) {
+            // Finalize any temp selections from previous job before switching
+            if (uploadState.currentSourceJobId && uploadState.tempSelectedInPanel.size > 0) {
+                const prevJob = uploadState.allJobs.find(j => j.id === uploadState.currentSourceJobId);
+                if (prevJob) {
+                    uploadState.tempSelectedInPanel.forEach(candidateId => {
+                        const candidate = uploadState.sourceJobCandidates.find(c => c.id === candidateId);
+                        if (candidate && !uploadState.selectedCandidates.find(sc => sc.id === candidate.id)) {
+                            uploadState.selectedCandidates.push({
+                                ...candidate,
+                                sourceJobId: uploadState.currentSourceJobId,
+                                sourceJobTitle: prevJob.title
+                            });
+                        }
+                    });
+                    uploadState.tempSelectedInPanel.clear();
+                }
+            }
+
+            uploadState.currentSourceJobId = jobId;
+            renderJobsDropdown();
+
+            try {
+                const response = await fetchWithAuth(`/jobs/${jobId}/candidates`);
+                if (response && response.ok) {
+                    uploadState.sourceJobCandidates = await getSafeJson(response) || [];
+                    uploadState.currentSearchQuery = '';
+                    document.getElementById('candidate-search-unified').value = '';
+                    renderCandidatesUnified();
+                    renderImportSelectedListUnified();
+                }
+            } catch (error) {
+                console.error('Failed to load candidates:', error);
+                document.getElementById('candidates-list-panel').innerHTML = '<p class="text-sm text-red-400 text-center py-8">Failed to load candidates</p>';
+            }
+        }
+
+        function renderCandidatesUnified(searchQuery = '') {
+            const panel = document.getElementById('candidates-list-panel');
+
+            const filtered = uploadState.sourceJobCandidates.filter(c => {
+                if (searchQuery) {
+                    return c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        c.email.toLowerCase().includes(searchQuery.toLowerCase());
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                panel.innerHTML = '<p class="text-sm text-gray-400 text-center py-8">No candidates found</p>';
+                return;
+            }
+
+            panel.innerHTML = filtered.map(candidate => {
+                const isSelected = uploadState.tempSelectedInPanel.has(candidate.id);
+                const skills = candidate.parsed_skills || [];
+
+                return `
+                    <div class="relative group">
+                        <label class="flex items-start gap-3 p-3 rounded-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-primary/40 transition-colors cursor-pointer ${isSelected ? 'border-primary/50 bg-[#E9FBEF]/30 dark:bg-primary/5' : ''}">
+                            <input onchange="toggleCandidateUnified('${candidate.id}')" ${isSelected ? 'checked' : ''} type="checkbox" class="mt-1 w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary bg-gray-50 dark:bg-gray-700"/>
+                            <div class="flex flex-col flex-1 min-w-0">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-sm font-bold text-gray-700 dark:text-gray-200">${candidate.name}</span>
+                                </div>
+                                <span class="text-xs text-gray-400 mb-2 truncate">${candidate.email}</span>
+                                ${skills.length > 0 ? `
+                                    <div class="flex flex-wrap gap-1.5">
+                                        ${skills.slice(0, 3).map(skill =>
+                    `<span class="px-1.5 py-0.5 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-[10px] font-medium border border-gray-200 dark:border-gray-600">${skill}</span>`
+                ).join('')}
+                                        ${skills.length > 3 ? `<span class="px-1.5 py-0.5 rounded-md text-[10px] text-gray-400">+${skills.length - 3}</span>` : ''}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </label>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleCandidateUnified(candidateId) {
+            if (uploadState.tempSelectedInPanel.has(candidateId)) {
+                uploadState.tempSelectedInPanel.delete(candidateId);
+            } else {
+                uploadState.tempSelectedInPanel.add(candidateId);
+            }
+            renderCandidatesUnified(uploadState.currentSearchQuery);
+            renderImportSelectedListUnified();
+        }
+
+        function filterCandidatesUnified(query) {
+            uploadState.currentSearchQuery = query;
+            renderCandidatesUnified(query);
+        }
+
+        function renderImportSelectedListUnified() {
+            const tempList = Array.from(uploadState.tempSelectedInPanel).map(id =>
+                uploadState.sourceJobCandidates.find(c => c.id === id)
+            ).filter(Boolean);
+
+            const finalList = uploadState.selectedCandidates;
+            const allSelected = [...finalList, ...tempList];
+
+            const list = document.getElementById('import-selected-list-unified');
+            const count = document.getElementById('import-selected-count-unified');
+
+            count.textContent = `${allSelected.length} Selected`;
+
+            if (allSelected.length === 0) {
+                list.innerHTML = '<p class="text-sm text-gray-400 w-full text-center py-4">No candidates selected yet</p>';
+                return;
+            }
+
+            list.innerHTML = allSelected.map((candidate, index) => {
+                const colors = ['bg-blue-100 text-blue-600', 'bg-purple-100 text-purple-600', 'bg-orange-100 text-orange-600', 'bg-pink-100 text-pink-600', 'bg-green-100 text-green-600'];
+                const colorClass = colors[index % colors.length];
+                const initials = candidate.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                const isTemp = uploadState.tempSelectedInPanel.has(candidate.id);
+
+                return `
+                    <div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <div class="h-6 w-6 rounded-full ${colorClass} flex items-center justify-center text-[10px] font-bold shrink-0">${initials}</div>
+                        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">${candidate.name}</span>
+                        <button onclick="${isTemp ? `toggleCandidateUnified('${candidate.id}')` : `removeImportedCandidateUnified('${candidate.id}')`}" class="text-gray-400 hover:text-red-500 transition-colors shrink-0">
+                            <span class="material-symbols-outlined text-[16px]">close</span>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function removeImportedCandidateUnified(candidateId) {
+            uploadState.selectedCandidates = uploadState.selectedCandidates.filter(c => c.id !== candidateId);
+            renderImportSelectedListUnified();
+        }
+
+        // Review & Confirm
+        function renderReviewSummary() {
+            const filesList = document.getElementById('review-files-list');
+            const filesCount = document.getElementById('review-files-count');
+            filesCount.textContent = uploadState.uploadedFiles.length;
+
+            if (uploadState.uploadedFiles.length === 0) {
+                filesList.innerHTML = '<p class="text-sm text-gray-400 text-center py-4">No files uploaded</p>';
+            } else {
+                filesList.innerHTML = uploadState.uploadedFiles.map((fileData, index) => {
+                    const icon = fileData.type.includes('pdf') ? 'picture_as_pdf' : 'description';
+                    const iconBg = fileData.type.includes('pdf') ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' : 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400';
+
+                    return `
+                        <div class="group flex items-center justify-between p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/40 hover:shadow-md transition-all bg-white dark:bg-gray-800">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-lg ${iconBg} flex items-center justify-center">
+                                    <span class="material-symbols-outlined">${icon}</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">${fileData.name}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">${fileData.size} • Just now</p>
+                                </div>
+                            </div>
+                            <button onclick="removeUploadFile(${index}); renderReviewSummary();" class="text-gray-400 hover:text-red-500 transition-colors p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg">
+                                <span class="text-sm font-medium hidden group-hover:inline mr-1">Remove</span>
+                                <span class="material-symbols-outlined text-[20px] align-middle">delete</span>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            }
+            // Render Candidates with duplicate analysis
+            const candidatesList = document.getElementById('review-candidates-list');
+            const candidatesCount = document.getElementById('review-candidates-count');
+            const totalCandidates = uploadState.selectedCandidates.length;
+            candidatesCount.textContent = totalCandidates;
+
+            // Calculate duplicates
+            const dupeSet = uploadState.duplicateEmails || new Set();
+            const duplicates = uploadState.selectedCandidates.filter(c => dupeSet.has(c.email.toLowerCase()));
+            const duplicateCount = duplicates.length;
+            const newCount = totalCandidates - duplicateCount;
+
+            let summaryHTML = '';
+            if (duplicateCount > 0) {
+                summaryHTML = `
+                    <div class="mb-4 p-4 rounded-xl bg-orange-50 dark:bg-orange-900/10 border border-orange-200 dark:border-orange-800 flex items-start gap-3">
+                        <span class="material-symbols-outlined text-orange-500 mt-0.5">info</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-orange-700 dark:text-orange-400">Import Analysis</h4>
+                            <p class="text-xs text-orange-600 dark:text-orange-300 mt-1">
+                                You have selected <strong>${totalCandidates}</strong> candidates. 
+                                <strong>${duplicateCount}</strong> are already in this job and will be skipped. 
+                                <strong>${newCount}</strong> new candidates will be added.
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (totalCandidates === 0) {
+                candidatesList.innerHTML = summaryHTML + '<p class="text-sm text-gray-400 text-center py-4">No candidates imported</p>';
+            } else {
+                const listHTML = uploadState.selectedCandidates.map((candidate, index) => {
+                    const colors = ['bg-indigo-100 text-indigo-600', 'bg-emerald-100 text-emerald-600', 'bg-purple-100 text-purple-600', 'bg-pink-100 text-pink-600'];
+                    const colorClass = colors[index % colors.length];
+                    const initials = candidate.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                    const skills = candidate.parsed_skills || [];
+                    const isDupe = dupeSet.has(candidate.email.toLowerCase());
+
+                    return `
+                        <div class="flex items-center justify-between p-3 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary/40 hover:bg-[#E9FBEF]/30 dark:hover:bg-primary/5 transition-all group bg-white dark:bg-gray-800 ${isDupe ? 'opacity-70' : ''}">
+                            <div class="flex items-center gap-4 flex-1">
+                                <div class="w-10 h-10 rounded-full ${colorClass} dark:bg-${colorClass.split(' ')[0].replace('bg-', '')}-900/30 flex items-center justify-center text-sm font-bold shadow-sm">
+                                    ${initials}
+                                </div>
+                                <div class="flex flex-col min-w-0">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-sm font-bold text-gray-900 dark:text-white truncate">${candidate.name}</span>
+                                        ${isDupe ? '<span class="px-1.5 py-0.5 rounded text-[10px] font-medium bg-orange-100 text-orange-600 border border-orange-200">Duplicate</span>' : ''}
+                                    </div>
+                                    <span class="text-xs text-gray-500 dark:text-gray-400 truncate">${candidate.email}</span>
+                                </div>
+                            </div>
+                            ${skills.length > 0 ? `
+                                <div class="hidden sm:flex items-center gap-2 mr-4">
+                                    ${skills.slice(0, 2).map(skill =>
+                        `<span class="px-2 py-1 rounded-md bg-[#E9FBEF] dark:bg-primary/10 text-[#14a081] dark:text-primary text-[10px] font-semibold border border-primary/20">${skill}</span>`
+                    ).join('')}
+                                </div>
+                            ` : ''}
+                            <button onclick="removeImportedCandidateUnified('${candidate.id}'); renderReviewSummary();" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">close</span>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+
+                candidatesList.innerHTML = summaryHTML + listHTML;
+            }
+
+            const total = uploadState.uploadedFiles.length + uploadState.selectedCandidates.length;
+            document.getElementById('review-total-count').textContent = `${total} items selected`;
+        }
+
+        // Submit
+        async function confirmAndSubmit() {
+            const btn = document.getElementById('confirm-submit-btn');
+            const total = uploadState.uploadedFiles.length + uploadState.selectedCandidates.length;
+
+            if (total === 0) {
+                showToast("No Items Selected", "Please upload files or import candidates before submitting.", "warning");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Submitting...';
+
+            try {
+                document.getElementById('page-loader').style.display = 'flex';
+
+                let uploadedCount = 0;
+                let uploadFailures = 0;
+                let importedCount = 0;
+                let duplicateCount = 0;
+                let importFailures = 0;
+
+                for (const fileData of uploadState.uploadedFiles) {
+                    try {
+                        const formData = new FormData();
+                        formData.append('file', fileData.file);
+
+                        const res = await fetchWithAuth(`/jobs/${uploadState.jobId}/candidates`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                            },
+                            body: formData
+                        });
+
+                        if (res && res.ok) {
+                            uploadedCount++;
+                        } else {
+                            // Check for duplicate error
+                            const errData = await getSafeJson(res) || {};
+                            const detail = (errData.detail || '').toString().toLowerCase();
+                            if (res && res.status === 400 && (detail.includes('exists') || detail.includes('duplicate'))) {
+                                duplicateCount++;
+                            } else {
+                                throw new Error(errData.detail || (res ? `Upload failed with status ${res.status}` : 'Network error during upload'));
+                            }
+                        }
+                    } catch (e) {
+                        console.error('File upload failed', e);
+                        uploadFailures++;
+                    }
+                }
+
+                if (uploadState.selectedCandidates.length > 0) {
+                    const bySourceJob = {};
+                    uploadState.selectedCandidates.forEach(c => {
+                        if (!bySourceJob[c.sourceJobId]) {
+                            bySourceJob[c.sourceJobId] = [];
+                        }
+                        bySourceJob[c.sourceJobId].push(c.id);
+                    });
+
+                    for (const [sourceJobId, candidateIds] of Object.entries(bySourceJob)) {
+                        try {
+                            const res = await fetchWithAuth(`/jobs/${uploadState.jobId}/import_candidates`, {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    source_job_id: sourceJobId,
+                                    candidate_ids: candidateIds
+                                })
+                            });
+                            if (res && res.ok) {
+                                const data = await getSafeJson(res) || {};
+                                importedCount += Number(data.imported || 0);
+                                duplicateCount += Number(data.skipped || 0);
+                            } else {
+                                throw new Error(res ? `Import failed with status ${res.status}` : 'Network error during import');
+                            }
+                        } catch (e) {
+                            console.error('Import failed', e);
+                            importFailures++;
+                        }
+                    }
+                }
+
+                const totalFailed = uploadFailures + importFailures;
+                const totalProcessed = uploadedCount + importedCount + duplicateCount + totalFailed;
+                const totalSuccess = uploadedCount + importedCount;
+
+                // Populate Stats
+                document.getElementById('success-stat-total').textContent = totalProcessed;
+                document.getElementById('success-stat-added').textContent = totalSuccess;
+                document.getElementById('success-stat-duplicates').textContent = duplicateCount;
+                document.getElementById('success-stat-failed').textContent = (uploadFailures + importFailures);
+
+                // Hide loader and show success step
+                document.getElementById('page-loader').style.display = 'none';
+                goToUploadStep(4);
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                showToast("Submission Failed", `Failed to upload/import candidates: ${error.message || 'Unknown error'}`, "error");
+                btn.disabled = false;
+                btn.innerHTML = 'Confirm & Submit <span class="material-symbols-outlined text-[18px]">check</span>';
+                document.getElementById('page-loader').style.display = 'none';
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function showToast(title, message, type = 'success') {
+            const toast = document.createElement('div');
+
+            // Icon based on type
+            let icon = 'check_circle';
+            let iconColor = 'text-green-500';
+            let bgColor = 'bg-white dark:bg-gray-800';
+
+            if (type === 'error') {
+                icon = 'error';
+                iconColor = 'text-red-500';
+            } else if (type === 'warning') {
+                icon = 'warning';
+                iconColor = 'text-orange-500';
+            }
+
+            // Top-Right
+            toast.className = `fixed top-24 right-4 z-[110] flex items-start gap-3 p-4 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 transform transition-all duration-300 translate-x-10 opacity-0 ${bgColor} max-w-sm w-full`;
+
+            toast.innerHTML = `
+                <span class="material-symbols-outlined ${iconColor} mt-0.5">${icon}</span>
+                <div>
+                    <h4 class="font-bold text-sm text-gray-900 dark:text-white">${title}</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${message}</p>
+                </div>
+                <button onclick="this.parentElement.remove()" class="ml-auto text-gray-400 hover:text-gray-600">
+                    <span class="material-symbols-outlined text-[18px]">close</span>
+                </button>
+            `;
+
+            document.body.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-x-10', 'opacity-0');
+            });
+
+            // Auto dismiss removed
+            setTimeout(() => {
+                toast.classList.add('translate-x-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 5000);
+        }
+    </script>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" style="display: none;"
+        class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm items-center justify-center animate-fade-in p-4">
+        <div onclick="event.stopPropagation()"
+            class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl w-full max-w-sm overflow-hidden transform transition-all scale-100 opacity-100">
+            <div class="p-6 text-center">
+                <div id="confirm-icon-bg"
+                    class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mx-auto mb-4">
+                    <span id="confirm-icon"
+                        class="material-symbols-outlined text-red-600 dark:text-red-400 text-2xl">warning</span>
+                </div>
+                <h3 id="confirm-title" class="text-lg font-bold text-gray-900 dark:text-white mb-2">Are you sure?</h3>
+                <p id="confirmation-message" class="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                    This action cannot be undone.
+                </p>
+                <div class="flex items-center justify-center gap-3">
+                    <button type="button" onclick="hideConfirmModal()"
+                        class="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="button" id="confirm-action-btn"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors shadow-sm shadow-red-200 dark:shadow-none">
+                        Yes, Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentConfirmCallback = null;
+
+        /**
+         * options: {
+         *   title: string,
+         *   icon: string (material symbol),
+         *   iconColorClass: string (e.g. 'text-red-600'),
+         *   iconBgClass: string (e.g. 'bg-red-100'),
+         *   confirmText: string,
+         *   confirmBtnClass: string
+         * }
+         */
+        function showConfirmModal(message, callback, options = {}) {
+            window.isModalOpen = true; // Guard on
+            document.body.classList.add('modal-open');
+            const modal = document.getElementById('confirmation-modal');
+            const msgEl = document.getElementById('confirmation-message');
+            const btn = document.getElementById('confirm-action-btn');
+
+            // Dynamic Elements
+            const titleEl = document.getElementById('confirm-title');
+            const iconEl = document.getElementById('confirm-icon');
+            const iconBgEl = document.getElementById('confirm-icon-bg');
+
+            if (msgEl) msgEl.textContent = message;
+            if (titleEl) titleEl.textContent = options.title || 'Are you sure?';
+
+            // Icon
+            if (iconEl && iconBgEl) {
+                iconEl.textContent = options.icon || 'warning';
+                let iconColor = options.iconColorClass || 'text-red-600 dark:text-red-400';
+                let iconBg = options.iconBgClass || 'bg-red-100 dark:bg-red-900/30';
+                iconEl.className = `material-symbols-outlined text-2xl ${iconColor}`;
+                iconBgEl.className = `w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${iconBg}`;
+            }
+
+            // Button
+            if (btn) {
+                btn.textContent = options.confirmText || 'Yes, Proceed';
+                const defaultBtnClass = "px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm";
+                const colorClass = options.confirmBtnClass || "bg-red-600 text-white hover:bg-red-700 shadow-red-200 dark:shadow-none";
+                btn.className = `${defaultBtnClass} ${colorClass}`;
+            }
+
+            currentConfirmCallback = callback;
+
+            // Set up one-time click handler
+            btn.onclick = () => {
+                if (currentConfirmCallback) currentConfirmCallback();
+                hideConfirmModal();
+            };
+
+            if (modal) {
+                modal.style.display = 'flex';
+                // Trap clicks
+                modal.onclick = (e) => {
+                    if (e.target === modal) hideConfirmModal();
+                };
+            }
+        }
+
+        function hideConfirmModal() {
+            window.isModalOpen = false; // Guard off
+            document.body.classList.remove('modal-open');
+            const modal = document.getElementById('confirmation-modal');
+            if (modal) modal.style.display = 'none';
+            currentConfirmCallback = null;
+        }
+    </script>
+</body>
+
+</html>

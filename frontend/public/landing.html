@@ -54,6 +54,24 @@
 </head>
 
 <body class="font-display bg-background-light text-navy antialiased overflow-x-hidden">
+    <!-- Global Loader -->
+    <div id="global-loader"
+        style="position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, 0.9);">
+        <div
+            style="height: 64px; width: 64px; border-radius: 50%; border: 4px solid #e5e7eb; border-top-color: #19c29d; animation: spin 1s linear infinite;">
+        </div>
+        <style>
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </div>
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
@@ -897,6 +915,33 @@
                         <div class="flex flex-col items-center gap-6">
                             <h2 class="text-navy dark:text-white text-[32px] font-bold leading-tight text-center">Sign
                                 In to Latsize</h2>
+                            <div class="w-full pt-2">
+                                <button
+                                    class="flex h-12 w-full cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-5 text-gray-700 dark:text-gray-200 text-base font-medium leading-normal hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    <svg class="h-5 w-5" fill="none" viewbox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M22.5777 12.2714C22.5777 11.4164 22.5077 10.5844 22.3677 9.77539H12.2178V14.4554H18.1577C17.9017 16.0354 17.0717 17.3914 15.8117 18.2614V21.1014H19.6517C21.5717 19.3304 22.5777 16.0964 22.5777 12.2714Z"
+                                            fill="#4285F4"></path>
+                                        <path
+                                            d="M12.2178 23.0002C15.1158 23.0002 17.5848 22.0392 19.6518 20.4282L15.8118 17.5882C14.8998 18.2272 13.6828 18.6352 12.2178 18.6352C9.42379 18.6352 7.07479 16.7192 6.24479 14.1682H2.28479V17.1082C4.26179 21.0852 7.92179 23.0002 12.2178 23.0002Z"
+                                            fill="#34A853"></path>
+                                        <path
+                                            d="M6.24476 14.1681C6.00276 13.4831 5.85976 12.7531 5.85976 11.9991C5.85976 11.2451 6.00276 10.5151 6.24476 9.83011V6.89011H2.28476C1.53676 8.34511 1.15176 10.1161 1.15176 11.9991C1.15176 13.8821 1.53676 15.6531 2.28476 17.1081L6.24476 14.1681Z"
+                                            fill="#FBBC05"></path>
+                                        <path
+                                            d="M12.2178 5.36489C13.7808 5.36489 15.2208 5.92089 16.3268 6.97889L19.7218 3.58389C17.5778 1.63889 15.1158 0.998886 12.2178 0.998886C7.92179 0.998886 4.26179 2.91389 2.28479 6.89089L6.24479 9.83089C7.07479 7.27989 9.42379 5.36489 12.2178 5.36489Z"
+                                            fill="#EA4335"></path>
+                                    </svg>
+                                    <span class="truncate">Sign in with Google</span>
+                                </button>
+                            </div>
+                            <div class="relative flex w-full items-center justify-center py-2">
+                                <div class="absolute h-px w-full bg-gray-200 dark:bg-gray-700"></div>
+                                <p
+                                    class="relative bg-white dark:bg-gray-900 px-4 text-sm font-normal text-gray-500 dark:text-gray-400">
+                                    or</p>
+                            </div>
                             <div class="flex w-full flex-col items-stretch gap-4">
                                 <label class="flex flex-col flex-1">
                                     <p class="text-gray-600 dark:text-gray-300 text-sm font-medium leading-normal pb-2">
@@ -1067,15 +1112,19 @@
             }
         });
 
-        const API_BASE_URL = 'http://localhost:8000/api/v1';
+        const API_BASE_URL = '/api/v1';
 
         async function handleSignIn() {
             const email = document.getElementById('signin-email').value;
             const password = document.getElementById('signin-password').value;
             const errorEl = document.getElementById('signin-error');
+            const loader = document.getElementById('global-loader');
 
             errorEl.classList.add('hidden');
             errorEl.textContent = '';
+
+            // Show loader immediately
+            loader.style.display = 'flex';
 
             try {
                 const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -1084,22 +1133,33 @@
                     body: JSON.stringify({ email, password })
                 });
 
-                const data = await response.json();
+                // Defensive parsing: handle empty or non-JSON responses (like 405 Method Not Allowed)
+                const text = await response.text();
+                let data = {};
+                try {
+                    data = text ? JSON.parse(text) : {};
+                } catch (e) {
+                    // Not JSON
+                    if (!response.ok) {
+                        throw new Error(`Server Error: ${response.status} ${response.statusText}`);
+                    }
+                    throw new Error("Invalid response format from server");
+                }
 
                 if (!response.ok) {
-                    throw new Error(data.detail || 'Login failed');
+                    throw new Error(data.detail || `Login failed (${response.status})`);
                 }
 
                 // Store token in localStorage and Cookie
                 localStorage.setItem('token', data.access_token);
                 document.cookie = `token=${data.access_token}; path=/; max-age=604800; SameSite=Lax`; // 7 days
 
-                // Close modal and redirect to dashboard
-                closeModals();
-                // alert('Successfully signed in!');
-                window.location.href = 'http://localhost:4000/dashboard';
+                // Redirect to dashboard (Loader stays visible)
+                window.location.href = '/dashboard.html';
 
             } catch (err) {
+                // Hide loader only on error
+                loader.style.display = 'none';
                 errorEl.textContent = err.message;
                 errorEl.classList.remove('hidden');
             }
@@ -1133,18 +1193,19 @@
                     })
                 });
 
-                const data = await response.json();
+                const text = await response.text();
+                let data = {};
+                try {
+                    data = text ? JSON.parse(text) : {};
+                } catch (e) {
+                    if (!response.ok) {
+                        throw new Error(`Signup Server Error: ${response.status}`);
+                    }
+                }
 
                 if (!response.ok) {
                     throw new Error(data.detail || 'Signup failed');
                 }
-
-                // Auto login logic (simulated by using the returned user data if token was present, but signup returns user)
-                // Since signup doesn't return token, we must ask to sign in OR we could modify backend to return token.
-                // For now, let's stick to the plan: "Account created successfully! Please sign in."
-                // BUT, to make it seamless as requested "land on the dashboard page", we should probably auto-login.
-                // However, I didn't modify signup to return a token.
-                // So I will auto-trigger login if I have the password.
 
                 // Auto-login
                 const loginResponse = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -1153,12 +1214,20 @@
                     body: JSON.stringify({ email, password })
                 });
 
-                const loginData = await loginResponse.json();
+                const loginText = await loginResponse.text();
+                let loginData = {};
+                try {
+                    loginData = loginText ? JSON.parse(loginText) : {};
+                } catch (e) {
+                    if (!loginResponse.ok) {
+                        throw new Error(`Login Server Error content: ${loginResponse.status}`);
+                    }
+                }
 
                 if (loginResponse.ok && loginData.access_token) {
                     localStorage.setItem('token', loginData.access_token);
                     document.cookie = `token=${loginData.access_token}; path=/; max-age=604800; SameSite=Lax`;
-                    window.location.href = 'http://localhost:4000/dashboard';
+                    window.location.href = '/dashboard.html';
                 } else {
                     alert('Account created! Please sign in.');
                     openSignIn();
